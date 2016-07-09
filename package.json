@@ -1,0 +1,35 @@
+{
+  "name": "paddles",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Natasha Hedeker <natasha.hedeker@gmail.com>",
+  "scripts": {
+    "knex": "knex",
+    "heroku-postbuild": "knex migrate:latest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bcrypt-as-promised": "^1.1.0",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "^4.14.0",
+    "express-validation": "^1.0.0",
+    "joi": "^9.0.0",
+    "knex": "^0.11.7",
+    "morgan": "^1.7.0",
+    "pg": "^6.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "dotenv": "^2.0.0",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2"
+  }
+}
