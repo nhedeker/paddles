@@ -10,7 +10,7 @@ exports.up = function(knex) {
     table.integer('league_id')
       .notNullable()
       .references('id')
-      .inTable('league')
+      .inTable('leagues')
       .onDelete('CASCADE')
       .index();
   });
