@@ -2,25 +2,25 @@
 exports.up = function(knex) {
   return knex.schema.createTable('games', (table) => {
     table.increments();
-    table.integer('team1_p1')
+    table.integer('team1_p1_id')
       .references('id')
       .inTable('players')
       .defaultTo('Unknown Player')
       .notNullable()
       .onDelete('UPDATE');
-    table.integer('team1_p2')
+    table.integer('team1_p2_id')
       .references('id')
       .inTable('players')
       .defaultTo('Unknown Player')
       .notNullable()
       .onDelete('UPDATE');
-    table.integer('team2_p1')
+    table.integer('team2_p1_id')
       .references('id')
       .inTable('players')
       .defaultTo('Unknown Player')
       .notNullable()
       .onDelete('UPDATE');
-    table.integer('team2_p2')
+    table.integer('team2_p2_id')
       .references('id')
       .inTable('players')
       .defaultTo('Unknown Player')
