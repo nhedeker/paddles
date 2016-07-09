@@ -12,7 +12,7 @@ exports.seed = function(knex) {
     })
     .then(() => {
       return knex.raw(
-        'SELECT setval("leagues_id_seq", (SELECT MAX(id) FROM leagues));'
+        "SELECT setval('leagues_id_seq', (SELECT MAX(id) FROM leagues));"
       );
     });
 };
