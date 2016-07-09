@@ -4,9 +4,9 @@ exports.up = function(knex) {
     table.increments();
     table.string('first_name').notNullable().defaultTo('');
     table.string('last_name').notNullable().defaultTo('');
-    table.string('email').notNullable().unique();
-    table.specificType('hashed_password', 'char(60)').notNullable();
-    table.integer('elo').notNullable().defaultTo(1500);
+    table.string('email').unique();
+    table.specificType('hashed_password', 'char(60)');
+    table.integer('elo').defaultTo(1500);
     table.integer('league_id')
       .notNullable()
       .references('id')

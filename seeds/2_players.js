@@ -6,15 +6,6 @@ exports.seed = function(knex) {
     .then(() => {
       return knex('players').insert([
         {
-          id: 0,
-          first_name: 'Unknown',
-          last_name: 'Player',
-          email: '',
-          league_id: 1,
-          elo: 0,
-          hashed_password: '$2a$12$N8bT4pgJS5MaybyVH8W3jeteXhdLGESQNVgHFWak71XuFCRiF2jxK'
-        },
-        {
           id: 1,
           first_name: 'Stanley',
           last_name: 'Paddles',
