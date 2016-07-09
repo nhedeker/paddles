@@ -1,15 +1,18 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
 const knex = require('../knex');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-as-promised');
+
+// eslint-disable-next-line new-cap
+const router = express.Router();
 
 router.post('/session', (req, res, next) => {
   const { email, password } = req.body;
 
-  if (!username || username.trim() === '') {
-    const err = new Error('Email must not be blank');
+  if (!email || email.trim() === '') {
+    const err = new Error('email must not be blank');
+
     err.status = 400;
 
     return next(err);
@@ -17,46 +20,51 @@ router.post('/session', (req, res, next) => {
 
   if (!password || password.trim() === '') {
     const err = new Error('Password must not be blank');
+
     err.status = 400;
 
     return next(err);
   }
 
-  knex('players')
+  let player;
+
+  knex('users')
     .where('email', email)
     .first()
-    .then((player) => {
-      if (!player) {
+    .then((row) => {
+      if (!row) {
         const err = new Error('Unauthorized');
+
         err.status = 401;
 
         throw err;
       }
 
-      const hashed_password = player.hashed_password
+      player = row;
 
-      return bcrypt.compare(password, hashed_password, (err, isMatch) => {
-        if (err) {
-          throw err;
-        }
+      // eslint-disable-next-line camelcase
+      const hashed_password = player.hashed_password;
 
-        if (!isMatch) {
-          const err = new Error('Unauthorized');
-          err.status = 401;
+      return bcrypt.compare(password, hashed_password);
+    })
+    .then((user) => {
+      req.session.userId = user.id;
+      res.cookie('loggedIn', true);
+      res.sendStatus(200);
+    })
+    .catch(bcrypt.MISMATCH_ERROR, () => {
+      const err = new Error('Unauthorized');
 
-          throw err;
-        }
+      err.status = 401;
 
-        req.session.userId = player.id;
-        res.sendStatus(200);
-      });
+      throw err;
     })
     .catch((err) => {
       next(err);
     });
 });
 
-router.delete('/session', (req, res, next) => {
+router.delete('/session', (req, res, _next) => {
   delete req.session.userId;
   res.clearCookie('loggedIn');
   res.sendStatus(200);

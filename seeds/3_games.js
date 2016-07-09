@@ -1,9 +1,11 @@
+/* eslint max-len: "off", camelcase: "off", arrow-body-style: "off" */
+
 'use strict';
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('games').del()
-    .then(function () {
+    .then(() => {
       return knex('games').insert([
         {
           id: 1,
