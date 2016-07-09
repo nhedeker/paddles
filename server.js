@@ -2,8 +2,8 @@
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config({silent: true});
-};
+  require('dotenv').config({ silent: true });
+}
 
 const express = require('express');
 const path = require('path');
@@ -23,6 +23,7 @@ app.disable('x-powered-by');
 
 if (process.env.NODE_ENV !== 'test') {
   const morgan = require('morgan');
+
   app.use(morgan('short'));
 }
 
