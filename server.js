@@ -1,3 +1,4 @@
+// eslint-disable-next-line strict
 'use strict';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -14,7 +15,7 @@ const cookieSession = require('cookie-session');
 
 const leagues = require('./routes/leagues');
 const players = require('./routes/players');
-const sesssion = require('./routes/session');
+const session = require('./routes/session');
 
 const app = express();
 
@@ -42,18 +43,22 @@ app.use((_req, res) => {
   res.sendStatus(404);
 });
 
+// eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
   if (err.status) {
     return res
       .status(err.status)
       .send(err);
   }
+
+  // eslint-disable-next-line no-console
   console.error(err.statck);
   res.sendStatus(500);
 });
 
 app.listen(port, () => {
   if (process.env.NODE_ENV !== 'test') {
+    // eslint-disable-next-line no-console
     console.log('Listening on port', port);
   }
 });
