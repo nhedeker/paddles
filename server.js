@@ -35,7 +35,7 @@ app.use(cookieSession({
 
 app.use(express.static(path.join('public')));
 
-app.use(leagues);
+// app.use(leagues);
 app.use(players);
 app.use(session);
 
@@ -52,7 +52,7 @@ app.use((err, _req, res, _next) => {
   }
 
   // eslint-disable-next-line no-console
-  console.error(err.statck);
+  console.error(err.stack);
   res.sendStatus(500);
 });
 
