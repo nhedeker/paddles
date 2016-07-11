@@ -8,7 +8,8 @@ const bcrypt = require('bcrypt-as-promised');
 const router = express.Router();
 
 router.post('/session', (req, res, next) => {
-  const { playerEmail, playerPassword } = req.body;
+  let { playerEmail } = req.body;
+  const { playerPassword } = req.body;
 
   if (!playerEmail || playerEmail.trim() === '') {
     const err = new Error('email must not be blank');
@@ -17,6 +18,8 @@ router.post('/session', (req, res, next) => {
 
     return next(err);
   }
+
+  playerEmail = playerEmail.toLowerCase();
 
   if (!playerPassword || playerPassword.trim() === '') {
     const err = new Error('Password must not be blank');
