@@ -133,7 +133,7 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
     team2_p1_id: team2P1Id,
     team1_score: team1Score,
     team2_score: team2Score,
-    league_id: req.session.id
+    league_id: req.session.leagueId
   };
 
   if (team1P2Id && team2P2Id) {
