@@ -17,7 +17,7 @@ const checkAuth = function(req, res, next) {
   next();
 };
 
-router.post('/league', (req, res, next) =>{
+router.post('/league', ev(validations.postLeague), (req, res, next) =>{
   const {name, password} = req.body;
 
   knex('leagues')
@@ -26,10 +26,10 @@ router.post('/league', (req, res, next) =>{
     .first()
     .then((nameRes) => {
       if (nameRes) {
-        return res
-          .status(400)
-          .set('Content-Type', 'text/plain')
-          .send('League name already exists.')
+        const err = new Error('League name already exists.');
+        err.status(400);
+
+        throw err;
       }
 
       return bcrypt.hash(password, 10)
@@ -49,7 +49,7 @@ router.post('/league', (req, res, next) =>{
     });
 });
 
-router.post('/league/player', (req, res, next) => {
+router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
   let leagueId;
   const { name, leaguePassword, firstName, lastName, playerEmail, playerPassword  } = req.body;
 
@@ -102,11 +102,12 @@ router.post('/league/player', (req, res, next) => {
         })
     })
     .catch((err) => {
+      console.log(err);
       next(err);
     });
 });
 
-router.post('/league/game', (req, res, next) => {
+router.post('/league/game', ev(validations.postGame), (req, res, next) => {
   const { team1P1Id, team1P2Id, team2P1Id, team2P2Id, team1Score, team2Score } = req.body;
 
   let newGame = {
@@ -114,7 +115,7 @@ router.post('/league/game', (req, res, next) => {
     team2_p1_id: team2P1Id,
     team1_score: team1Score,
     team2_score: team2Score,
-    league_id: req.session.leagueId
+    league_id: req.session.id
   };
 
   if (team1P2Id && team2P2Id) {

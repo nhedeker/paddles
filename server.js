@@ -46,9 +46,16 @@ app.use((_req, res) => {
 // eslint-disable-next-line max-params
 app.use((err, _req, res, _next) => {
   if (err.status) {
+    if (err.message === 'validation error') {
+      return res
+        .status(err.status)
+        .set('Content-Type', 'text/plain')
+        .send(err.errors[0].messages[0]);
+    }
     return res
       .status(err.status)
-      .send(err);
+      .set('Content-Type', 'text/plain')
+      .send(err.message);
   }
 
   // eslint-disable-next-line no-console
