@@ -52,6 +52,7 @@ app.use((err, _req, res, _next) => {
         .set('Content-Type', 'text/plain')
         .send(err.errors[0].messages[0]);
     }
+
     return res
       .status(err.status)
       .set('Content-Type', 'text/plain')
