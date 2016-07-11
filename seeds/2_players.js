@@ -43,7 +43,7 @@ exports.seed = function(knex) {
           elo: 1600,
           hashed_password: '$2a$12$4ySBFqf9.rNL45eHW9XIbOVGc.m/GNdrPTLL655.vZO2NoGCmAltG'
         }
-      ])
+      ]);
     })
     .then(() => {
       return knex.raw(
