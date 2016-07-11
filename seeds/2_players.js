@@ -11,7 +11,7 @@ exports.seed = function(knex) {
           id: 1,
           first_name: 'Stanley',
           last_name: 'Paddles',
-          email: 'Stanley@Paddles.net',
+          email: 'stanley@paddles.net',
           league_id: 1,
           elo: 2000,
           hashed_password: '$2a$12$oUMS2tVk4HT3MX5L5f31oOJHzyOgKwShyeXXKw.5cvNJC.TjZ3XI.'
@@ -29,7 +29,7 @@ exports.seed = function(knex) {
           id: 3,
           first_name: 'Ash',
           last_name: 'Ketcham',
-          email: 'AKetcham@catchthemall.net',
+          email: 'aketcham@catchthemall.net',
           league_id: 1,
           elo: 1300,
           hashed_password: '$2a$12$P.5FtBcaDya4sqL6rVok3ONnSSE/hRqRyq2R.Ge/wMunWoxPi.Vwe'

@@ -22,7 +22,7 @@
       url: '/session',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ email, password})
+      data: JSON.stringify({ playerEmail, playerPassword })
     });
 
     $xhr.done(() => {
