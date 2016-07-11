@@ -25,6 +25,7 @@ exports.up = function(knex) {
     table.integer('league_id')
       .references('id')
       .inTable('leagues')
+      .notNullable()
       .onDelete('CASCADE');
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
   });
