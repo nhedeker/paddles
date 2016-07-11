@@ -80,15 +80,15 @@ router.delete('/player', checkAuth, (req, res, next) => {
         return next(err);
       }
 
-      knex('players')
+      return knex('players')
         .where('id', userId)
-        .update({ email: null, hashed_password: null, elo: null })
-        .then(() => {
-          req.session.userId = null;
-          req.session.leagueId = null;
-          res.clearCookie('loggedIn');
-          res.sendStatus(200);
-        });
+        .update({ email: null, hashed_password: null, elo: null });
+    })
+    .then(() => {
+      req.session.userId = null;
+      req.session.leagueId = null;
+      res.clearCookie('loggedIn');
+      res.sendStatus(200);
     })
     .catch((err) => {
       next(err);
