@@ -28,7 +28,7 @@ router.post('/session', (req, res, next) => {
 
   let player;
 
-  knex('users')
+  knex('players')
     .where('email', email)
     .first()
     .then((row) => {
@@ -47,8 +47,9 @@ router.post('/session', (req, res, next) => {
 
       return bcrypt.compare(password, hashed_password);
     })
-    .then((user) => {
-      req.session.userId = user.id;
+    .then(() => {
+      req.session.userId = player.id;
+      req.session.leagueId = player.league_id;
       res.cookie('loggedIn', true);
       res.sendStatus(200);
     })
