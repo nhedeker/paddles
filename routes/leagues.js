@@ -1,17 +1,28 @@
 'use strict';
 
+// todo: leaderboard display
+
 const knex = require('../knex');
 const express = require('express');
 const router = express.Router();
 const ev = require('express-validation');
-const bcrypt = require('bcrypt-as-promised')
+const validations = require('../validations/leagues');
+const bcrypt = require('bcrypt-as-promised');
+
+const checkAuth = function(req, res, next) {
+  if (!req.session.userId) {
+    return res.sendStatus(401);
+  }
+
+  next();
+};
 
 router.post('/league', (req, res, next) =>{
-  const newLeague = req.body;
+  const {name, password} = req.body;
 
   knex('leagues')
     .select(knex.raw('1=1'))
-    .where('name', newLeague.name)
+    .where('name', name)
     .first()
     .then((nameRes) => {
       if (nameRes) {
@@ -21,12 +32,12 @@ router.post('/league', (req, res, next) =>{
           .send('League name already exists.')
       }
 
-      return bcrypt.hash(newLeague.password, 10)
+      return bcrypt.hash(password, 10)
     })
     .then((hashedPass) => {
       return knex('leagues')
         .insert({
-          name: newLeague.name,
+          name: name,
           hashed_password: hashedPass
         }, '*')
     })
@@ -92,9 +103,33 @@ router.post('/league/player', (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
+    });
 });
 
+router.post('/league/game', (req, res, next) => {
+  const { team1P1Id, team1P2Id, team2P1Id, team2P2Id, team1Score, team2Score } = req.body;
 
+  let newGame = {
+    team1_p1_id: team1P1Id,
+    team2_p1_id: team2P1Id,
+    team1_score: team1Score,
+    team2_score: team2Score,
+    league_id: req.session.leagueId
+  };
+
+  if (team1P2Id && team2P2Id) {
+    newGame.team1_p2_id = team1P2Id;
+    newGame.team2_p2_id = team2P2Id;
+  }
+
+  knex('games')
+    .insert(newGame, '*')
+    .then((game) => {
+      res.sendStatus(200)
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 module.exports = router;
