@@ -35,9 +35,8 @@ app.use(cookieSession({
 
 app.use(express.static(path.join('public')));
 
-
-app.use(players);
 app.use(leagues);
+app.use(players);
 app.use(session);
 
 app.use((_req, res) => {

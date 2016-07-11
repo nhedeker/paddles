@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 'use strict';
 
 const bcrypt = require('bcrypt');
@@ -6,7 +8,7 @@ const ev = require('express-validation');
 const validations = require('../validations/players');
 const express = require('express');
 
-// es-lint-disable-next-line new-cap
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 const checkAuth = function(req, res, next) {
@@ -17,7 +19,7 @@ const checkAuth = function(req, res, next) {
   next();
 };
 
-const updatePlayer = function(userId, playerObj, req, res, next) {
+const updatePlayer = function({ userId, playerObj, _req, res, next }) {
   knex('players')
     .where('id', userId)
     .update(playerObj)
@@ -34,7 +36,7 @@ router.patch('/player', checkAuth, ev(validations.post), (req, res, next) => {
   const playerEmail = req.body.playerEmail;
   const playerPassword = req.body.playerPassword;
 
-  if(!playerEmail && !playerPassword) {
+  if (!playerEmail && !playerPassword) {
     const err = new Error('Please update a field');
 
     err.status = 400;
@@ -56,11 +58,11 @@ router.patch('/player', checkAuth, ev(validations.post), (req, res, next) => {
 
       playerObj.hashed_password = hashedPassword;
 
-      updatePlayer(userId, playerObj, req, res, next);
-    })
+      updatePlayer({ userId, playerObj, req, res, next });
+    });
   }
   else {
-    updatePlayer(userId, playerObj, req, res, next);
+    updatePlayer({ userId, playerObj, req, res, next });
   }
 });
 
@@ -72,6 +74,7 @@ router.delete('/player', checkAuth, (req, res, next) => {
     .first()
     .then((player) => {
       if (!player) {
+        // eslint-disable-next-line max-len
         const err = new Error('Something went seriously wrong in the delete player route handler!');
 
         return next(err);
@@ -79,7 +82,7 @@ router.delete('/player', checkAuth, (req, res, next) => {
 
       knex('players')
         .where('id', userId)
-        .update({email: null, hashed_password: null, elo: null})
+        .update({ email: null, hashed_password: null, elo: null })
         .then(() => {
           req.session.userId = null;
           req.session.leagueId = null;
@@ -89,7 +92,7 @@ router.delete('/player', checkAuth, (req, res, next) => {
     })
     .catch((err) => {
       next(err);
-    })
+    });
 });
 
 module.exports = router;
