@@ -8,9 +8,9 @@ const bcrypt = require('bcrypt-as-promised');
 const router = express.Router();
 
 router.post('/session', (req, res, next) => {
-  const { email, password } = req.body;
+  const { playerEmail, playerPassword } = req.body;
 
-  if (!email || email.trim() === '') {
+  if (!playerEmail || playerEmail.trim() === '') {
     const err = new Error('email must not be blank');
 
     err.status = 400;
@@ -18,7 +18,7 @@ router.post('/session', (req, res, next) => {
     return next(err);
   }
 
-  if (!password || password.trim() === '') {
+  if (!playerPassword || playerPassword.trim() === '') {
     const err = new Error('Password must not be blank');
 
     err.status = 400;
@@ -29,7 +29,7 @@ router.post('/session', (req, res, next) => {
   let player;
 
   knex('players')
-    .where('email', email)
+    .where('email', playerEmail)
     .first()
     .then((row) => {
       if (!row) {
@@ -45,7 +45,7 @@ router.post('/session', (req, res, next) => {
       // eslint-disable-next-line camelcase
       const hashed_password = player.hashed_password;
 
-      return bcrypt.compare(password, hashed_password);
+      return bcrypt.compare(playerPassword, hashed_password);
     })
     .then(() => {
       req.session.userId = player.id;
