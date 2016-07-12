@@ -153,36 +153,28 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
 
 router.get('/league/games', checkAuth, (req, res, next) => {
   const leagueId = req.session.leagueId;
-  const leaderboard = {};
+
+  knex('games')
+    .select('first_name', 'last_name', 'elo')
+    .where('league_id', leagueId)
+    .orderBy('elo', 'desc')
+    .then((results) => {
+
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get('/league/players', checkAuth, (req, res, next) => {
+  const leagueId = req.session.leagueId;
 
   knex('players')
     .select('first_name', 'last_name', 'elo')
     .where('league_id', leagueId)
     .orderBy('elo', 'desc')
     .then((rankings) => {
-      leaderboard.rankings = rankings;
-
-      const subquery = knex('games')
-        .distinct('games.id')
-        .orderBy('games.id', 'desc')
-        .limit(2);
-
-      return knex('games')
-        .select(
-          'games.id',
-          'first_name',
-          'last_name',
-          'team1_score',
-          'team2_score'
-        )
-        .innerJoin('players', 'players.league_id', 'games.league_id')
-        .where('games.league_id', leagueId)
-        .whereIn('games.id', subquery)
-        .orderBy('games.id', 'desc');
-    })
-    .then((recentGames) => {
-      leaderboard.recentGames = recentGames;
-      res.status(200).send(leaderboard);
+      res.status(200).send(rankings);
     })
     .catch((err) => {
       next(err);
