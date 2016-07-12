@@ -155,11 +155,15 @@ router.get('/league/games', checkAuth, (req, res, next) => {
   const leagueId = req.session.leagueId;
 
   knex('games')
-    .select('first_name', 'last_name', 'elo')
-    .where('league_id', leagueId)
-    .orderBy('elo', 'desc')
-    .then((results) => {
-
+    .select('games.id', 'p1.first_name AS t1p1_first_name', 'p1.last_name AS t1p1_last_name', 'p2.first_name AS t1p2_first_name', 'p2.last_name AS t1p2_last_name', 'p3.first_name AS t2p1_first_name', 'p3.last_name AS t2p1_last_name', 'p4.first_name AS t2p2_first_name', 'p4.last_name AS t2p2_last_name', 'games.team1_score', 'games.team2_score')
+    .innerJoin('players AS p1', 'team1_p1_id', 'p1.id')
+    .leftJoin('players AS p2 ', 'team1_p2_id', 'p2.id')
+    .innerJoin('players as p3', 'team2_p1_id', 'p3.id')
+    .leftJoin('players as p4', 'team2_p2_id', 'p4.id')
+    .where('games.league_id', leagueId)
+    .orderBy('games.id', 'desc')
+    .then((recentGames) => {
+      res.status(200).send(recentGames);
     })
     .catch((err) => {
       next(err);
