@@ -4,12 +4,12 @@ const Joi = require('joi');
 
 module.exports.postLeague = {
   body: {
-    name: Joi.string()
+    leagueName: Joi.string()
       .label('League name')
       .required()
       .trim()
       .max(255),
-    password: Joi.string()
+    leaguePassword: Joi.string()
       .label('Password')
       .required()
       .trim()
@@ -19,7 +19,7 @@ module.exports.postLeague = {
 
 module.exports.postPlayer = {
   body: {
-    name: Joi.string()
+    leagueName: Joi.string()
       .label('League name')
       .required()
       .trim()

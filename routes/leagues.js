@@ -20,11 +20,11 @@ const checkAuth = function(req, res, next) {
 };
 
 router.post('/league', ev(validations.postLeague), (req, res, next) => {
-  const { name, password } = req.body;
+  const { leagueName, leaguePassword } = req.body;
 
   knex('leagues')
     .select(knex.raw('1=1'))
-    .where('name', name)
+    .where('name', leagueName)
     .first()
     .then((nameRes) => {
       if (nameRes) {
@@ -35,12 +35,12 @@ router.post('/league', ev(validations.postLeague), (req, res, next) => {
         throw err;
       }
 
-      return bcrypt.hash(password, 10);
+      return bcrypt.hash(leaguePassword, 12);
     })
     .then((hashedPass) =>
       knex('leagues')
         .insert({
-          name,
+          name: leagueName,
           hashed_password: hashedPass
         }, '*')
     )
@@ -55,7 +55,7 @@ router.post('/league', ev(validations.postLeague), (req, res, next) => {
 router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
   let leagueId;
   const {
-    name,
+    leagueName,
     leaguePassword,
     firstName,
     lastName,
@@ -76,7 +76,7 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
       }
 
       return knex('leagues')
-        .where('name', name)
+        .where('name', leagueName)
         .first()
         .then((leagueRes) => {
           if (!leagueRes) {
