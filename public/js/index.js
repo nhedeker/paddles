@@ -1,5 +1,11 @@
 'use strict';
+
 (function() {
+  if (window.COOKIES.loggedIn) {
+    window.location.href = '/table.html';
+
+    return;
+  }
 
   const createPlayer = function(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword) {
     const $xhr = $.ajax({
@@ -16,7 +22,7 @@
         return;
       }
 
-      Materialize.toast('Your account has been created!');
+      window.location.href = '/table.html';
     });
 
     $xhr.fail(() => {
@@ -47,9 +53,8 @@
   };
 
   $('.login-button').click((_event) => {
-
-    const playerEmail = $('#email').val().trim();
-    const playerPassword = $('#password').val().trim();
+    const playerEmail = $('#loginEmail').val().trim();
+    const playerPassword = $('#loginPassword').val().trim();
 
     if (!playerEmail) {
       return Materialize.toast('Enter an email, dummy.', 2000);
@@ -77,7 +82,7 @@
         return;
       }
 
-      Materialize.toast('Good job, mate.');
+      window.location.href = '/table.html';
     });
 
     $xhr.fail(() => {
@@ -86,8 +91,8 @@
   });
 
   $('.registration-button').click((_event) => {
-    const playerEmail = $('#email').val().trim();
-    const playerPassword = $('#password').val().trim();
+    const playerEmail = $('#regEmail').val().trim();
+    const playerPassword = $('#regPassword').val().trim();
     const playerConfirmPass = $('#passwordConfirm').val().trim();
     const firstName = $('#firstName').val().trim();
     const lastName = $('#lastName').val().trim();
