@@ -161,6 +161,7 @@ router.get('/league/games', checkAuth, (req, res, next) => {
     .orderBy('elo', 'desc')
     .then((rankings) => {
       leaderboard.rankings = rankings;
+
       const subquery = knex('games')
         .distinct('games.id')
         .orderBy('games.id', 'desc')
