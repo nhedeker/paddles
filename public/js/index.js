@@ -7,12 +7,19 @@
     return;
   }
 
-  const createPlayer = function(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword) {
+  // eslint-disable-next-line max-len
+  const createPlayer = function({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword }) {
     const $xhr = $.ajax({
       url: '/league/player',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword })
+      data: JSON.stringify({
+        leagueName,
+        leaguePassword,
+        firstName,
+        lastName,
+        playerEmail,
+        playerPassword })
     });
 
     $xhr.done(() => {
@@ -30,7 +37,8 @@
     });
   };
 
-  const createLeague = function(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword) {
+  // eslint-disable-next-line max-len
+  const createLeague = function({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword }) {
     const $xhrLeague = $.ajax({
       url: '/league',
       type: 'POST',
@@ -44,12 +52,13 @@
       }
 
       Materialize.toast('New League Created');
-      createPlayer(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword);
+
+      // eslint-disable-next-line max-len
+      createPlayer({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword });
     });
 
-    $xhrLeague.fail(() => {
-      return Materialize.toast('The server broke in league creation. Our apologies.');
-    });
+    // eslint-disable-next-line max-len
+    $xhrLeague.fail(() => Materialize.toast('The server broke in league creation. Our apologies.'));
   };
 
   $('.login-button').click((_event) => {
@@ -90,6 +99,7 @@
     });
   });
 
+  // eslint-disable-next-line max-statements
   $('.registration-button').click((_event) => {
     const playerEmail = $('#regEmail').val().trim();
     const playerPassword = $('#regPassword').val().trim();
@@ -127,6 +137,7 @@
       return Materialize.toast('Confirm your password, dummy.', 2000);
     }
 
+    // eslint-disable-next-line max-len
     if ((!regLeagueName || !regLeaguePass) && (!loginLeagueName || !loginLeaguePass)) {
       return Materialize.toast('Create or join a team, dummy.', 2000);
     }
@@ -137,16 +148,21 @@
     if (loginLeagueName && loginLeaguePass) {
       leagueName = loginLeagueName;
       leaguePassword = loginLeaguePass;
-      createPlayer(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword);
+
+      // eslint-disable-next-line max-len
+      createPlayer({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword });
+
       return;
     }
-    else if (regLeaguePass !== confirmRegLeaguePass){
-      return Materialize.toast('Confirm league password, dummy.', 2000);
-    }
-    else {
+    else if (regLeaguePass === confirmRegLeaguePass) {
       leagueName = regLeagueName;
       leaguePassword = regLeaguePass;
-      createLeague(leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword);
+
+      // eslint-disable-next-line max-len
+      createLeague({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword });
+    }
+    else {
+      return Materialize.toast('Confirm league password, dummy.', 2000);
     }
   });
 })();

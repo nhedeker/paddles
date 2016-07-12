@@ -75,6 +75,6 @@ module.exports.postGame = {
     team2Score: Joi.number()
       .label('Team 2 Score')
       .required()
-      .integer(),
+      .integer()
   }
 };

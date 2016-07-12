@@ -40,9 +40,13 @@ router.get('/player', checkAuth, (req, res, next) => {
     .first()
     .then((player) => {
       res.status(200).send(player);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
+// eslint-disable-next-line max-len
 router.patch('/player/email', checkAuth, ev(validations.post), (req, res, next) => {
   const { userId } = req.session;
   const playerEmail = req.body.playerEmail.toLowerCase();
@@ -76,6 +80,7 @@ router.patch('/player/email', checkAuth, ev(validations.post), (req, res, next) 
     });
 });
 
+// eslint-disable-next-line max-len
 router.patch('/player/password', checkAuth, ev(validations.post), (req, res, next) => {
   const { userId } = req.session;
   const playerPassword = req.body.playerPassword;
