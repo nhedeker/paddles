@@ -1,0 +1,6 @@
+nav .brand-logo {
+  text-transform: uppercase;
+  /*letter-spacing: 4.5px;*/
+  font-size: 1.75rem;
+  padding-left: 15px;
+}

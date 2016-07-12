@@ -3,3 +3,16 @@
   align-items: center;
   justify-content: center;
 }
+
+#settings {
+  margin-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#updateEmail, #updatePassword, #deleteAccount {
+  margin-left: 10px;
+  /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
+}

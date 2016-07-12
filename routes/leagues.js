@@ -19,6 +19,7 @@ const checkAuth = function(req, res, next) {
   next();
 };
 
+// creates a new league
 router.post('/league', ev(validations.postLeague), (req, res, next) => {
   const { leagueName, leaguePassword } = req.body;
 
@@ -52,6 +53,7 @@ router.post('/league', ev(validations.postLeague), (req, res, next) => {
     });
 });
 
+// creates a new player(user) within a certain league
 router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
   let leagueId;
   const {
@@ -96,7 +98,7 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
             .insert({
               first_name: firstName,
               last_name: lastName,
-              email: playerEmail,
+              email: playerEmail.toLowerCase(),
               hashed_password: hashedPass,
               league_id: leagueId
             }, '*')
@@ -117,6 +119,7 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
     });
 });
 
+// creates a game within a certain league
 // eslint-disable-next-line max-len
 router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next) => {
   const {
@@ -151,6 +154,23 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
     });
 });
 
+// Returns name of the league
+router.get('/league', checkAuth, (req, res, next) => {
+  const leagueId = req.session.leagueId;
+
+  knex('leagues')
+    .select('name')
+    .where('id', leagueId)
+    .first()
+    .then((league) => {
+      res.status(200).send(league.name);
+    })
+    .catch((err) => {
+      next(err);
+    })
+});
+
+// returns all games ordered by game id within a certain league
 router.get('/league/games', checkAuth, (req, res, next) => {
   const leagueId = req.session.leagueId;
 
@@ -170,6 +190,7 @@ router.get('/league/games', checkAuth, (req, res, next) => {
     });
 });
 
+//returns all players ordered by ELO score within a certain league
 router.get('/league/players', checkAuth, (req, res, next) => {
   const leagueId = req.session.leagueId;
 

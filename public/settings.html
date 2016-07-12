@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel='stylesheet' href="css/styles.css"/>
+    <link type="text/css" rel='stylesheet' href="css/navbar.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SITE NAME</title>
+  </head>
+  <body>
+    <nav class="red accent-4 z-depth-2">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">site name</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="settings.html"><i class="material-icons">settings</i></a></li>
+          <li><a class="session">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <div class="col offset-m2 s12 m8">
+        <div id="settings" class="z-depth-2 blue-grey darken-1 white-text">
+          <h5 class="center-align">Account Settings</h5>
+          <p id="firstName"></p>
+          <p id="lastName"></p>
+          <p id="email"></p>
+
+          <ul class="collapsible grey-text white" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">email</i>Change Email</div>
+              <div class="collapsible-body">
+                <div class="row">
+                  <div class="input-field col s12 m8">
+                    <input id="newEmail" type="email" class="validate">
+                    <label for="newEmail">New Email</label>
+                  </div>
+                </div>
+                <button id="updateEmail" class="waves-effect waves-light btn">Update Account</button>
+                <br></br>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">security</i>Change Password</div>
+              <div class="collapsible-body">
+                <div class="row">
+                  <div class="input-field col s12 m9">
+                    <input id="newPassword" type="password" class="validate">
+                    <label for="newPassword">New Password</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12 m9">
+                    <input id="confirmPassword" type="password" class="validate">
+                    <label for="confirmPassword">Confirm New Password</label>
+                  </div>
+                </div>
+                <button id="updatePassword" class="waves-effect waves-light btn">Update Account</button>
+                <br></br>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">delete_forever</i>Delete Account</div>
+              <div class="collapsible-body">
+                <p class="normal">Are you sure you would like to delete your account? You will not be able to recover your personal player record <strong>ever</strong> again.</p>
+                <button id="deleteAccount" class="waves-effect waves-light btn">Delete Account</button>
+                <br></br>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+  </body>
+</html>

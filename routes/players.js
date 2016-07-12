@@ -31,13 +31,57 @@ const updatePlayer = function({ userId, playerObj, _req, res, next }) {
     });
 };
 
-router.patch('/player', checkAuth, ev(validations.post), (req, res, next) => {
+router.get('/player', checkAuth, (req, res, next) => {
   const { userId } = req.session;
-  const playerEmail = req.body.playerEmail;
+
+  knex('players')
+    .select('first_name', 'last_name', 'email', 'elo')
+    .where('id', userId)
+    .first()
+    .then((player) => {
+      res.status(200).send(player);
+    });
+});
+
+router.patch('/player/email', checkAuth, ev(validations.post), (req, res, next) => {
+  const { userId } = req.session;
+  const playerEmail = req.body.playerEmail.toLowerCase();
+
+  if (!playerEmail) {
+    const err = new Error('Please enter a password');
+
+    err.status = 400;
+
+    return next(err);
+  }
+
+  const playerObj = { email: playerEmail };
+
+  knex('players')
+    .where('email', playerEmail)
+    .first()
+    .then((exists) => {
+      if (exists) {
+        const err = new Error('Already have email in database');
+
+        err.status = 400;
+
+        return next(err);
+      }
+
+      updatePlayer({ userId, playerObj, req, res, next });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/player/password', checkAuth, ev(validations.post), (req, res, next) => {
+  const { userId } = req.session;
   const playerPassword = req.body.playerPassword;
 
-  if (!playerEmail && !playerPassword) {
-    const err = new Error('Please update a field');
+  if (!playerPassword) {
+    const err = new Error('Please enter a new password');
 
     err.status = 400;
 
@@ -46,24 +90,15 @@ router.patch('/player', checkAuth, ev(validations.post), (req, res, next) => {
 
   const playerObj = {};
 
-  if (playerEmail) {
-    playerObj.email = playerEmail;
-  }
+  bcrypt.hash(playerPassword, 12, (hashErr, hashedPassword) => {
+    if (hashErr) {
+      return next(hashErr);
+    }
 
-  if (playerPassword) {
-    bcrypt.hash(playerPassword, 12, (hashErr, hashedPassword) => {
-      if (hashErr) {
-        return next(hashErr);
-      }
+    playerObj.hashed_password = hashedPassword;
 
-      playerObj.hashed_password = hashedPassword;
-
-      updatePlayer({ userId, playerObj, req, res, next });
-    });
-  }
-  else {
     updatePlayer({ userId, playerObj, req, res, next });
-  }
+  });
 });
 
 router.delete('/player', checkAuth, (req, res, next) => {
