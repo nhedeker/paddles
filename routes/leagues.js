@@ -1,15 +1,17 @@
 'use strict';
 
-/* eslint-disable camelcase */
+/* eslint-disable camelcase, quote-props */
 
+const fs = require('fs');
+const ev = require('express-validation');
+const validations = require('../validations/leagues');
+const bcrypt = require('bcrypt-as-promised');
 const knex = require('../knex');
+const request = require('request');
 const express = require('express');
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
-const ev = require('express-validation');
-const validations = require('../validations/leagues');
-const bcrypt = require('bcrypt-as-promised');
 
 const checkAuth = function(req, res, next) {
   if (!req.session.userId) {
@@ -104,6 +106,32 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
             }, '*')
         )
         .then(() => {
+          const options = {
+            url: 'https://api.postmarkapp.com/email',
+            method: 'POST',
+            headers: {
+              'X-Postmark-Server-Token': 'a7c49a8a-155d-4f7c-aaa4-9da07666aa19',
+              'Accept': 'application/json'
+            },
+            json: {
+              'From': 'paddles@kenmcgrady.com',
+              'To': playerEmail,
+              'Subject': 'Welcome to Paddles!',
+              'HtmlBody': '<h3>Hello! Welcome to Paddles!</h3><br></br><p>Thank you for signing up! We hope you enjoy the site!</p><br></br><p>Sincerely,</p><p>The Paddles Team</p>',
+              'TextBody': 'Hello! Welcome to Paddles!\Thank you for signing up! We hope you enjoy the site!\Sincerely,\The Paddles Team',
+              'ReplyTo': 'paddles@kenmcgrady.com'
+            }
+          };
+          request(options, (err, res, body) => {
+            if (err) {
+              console.error(err);
+              console.log('There was an error in sending the email');
+              console.log(err);
+            }
+
+            console.log('Response from Email: ', res.statusCode);
+            console.log(body);
+          });
           res.sendStatus(200);
         })
         .catch(bcrypt.MISMATCH_ERROR, () => {

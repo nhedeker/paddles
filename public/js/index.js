@@ -29,7 +29,7 @@
         return;
       }
 
-      window.location.href = '/table.html';
+      Materialize.toast('Your account has been created! Please login.');
     });
 
     $xhr.fail(() => {
