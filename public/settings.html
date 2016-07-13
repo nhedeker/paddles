@@ -13,7 +13,7 @@
     <title>SITE TITLE</title>
   </head>
   <body>
-    <nav class="red darken-3 z-depth-2">
+    <nav class="z-depth-2">
       <div class="nav-wrapper">
         <a href="table.html" class="brand-logo">site title</a>
         <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -32,15 +32,18 @@
 
     <div class="row">
       <div class="col offset-m2 s12 m8">
-        <div id="settings" class="z-depth-2 grey-text text-lighten-5">
-          <h5 class="center-align">Account Settings</h5>
-          <p id="firstName"></p>
-          <p id="lastName"></p>
-          <p id="email"></p>
-          <br></br>
-          <ul class="collapsible grey-text white" data-collapsible="accordion">
+        <div id="settings" class="z-depth-2 grey-text text-darken-3">
+          <h4 id="settingsTitle" class="center-align"><u>Account Settings</u></h4>
+          <div id='generalSettings'>
+            <p id="firstName"></p>
+            <p id="lastName"></p>
+            <p id="email"></p>
+          </div>
+          <!-- <br> -->
+          <!-- </br> -->
+          <ul class="collapsible white" data-collapsible="accordion">
             <li>
-              <div class="collapsible-header"><i class="material-icons">email</i>Change Email</div>
+              <div class="collapsible-header grey-text text-lighten-5"><i class="material-icons">email</i>Change Email</div>
               <div class="collapsible-body">
                 <div class="row">
                   <div class="input-field col s12 m8">
@@ -48,12 +51,12 @@
                     <label for="newEmail">New Email</label>
                   </div>
                 </div>
-                <button id="updateEmail" class="waves-effect waves-light btn">Update Account</button>
+                <button id="updateEmail" class="update waves-effect waves-light btn right">Update Account</button>
                 <br></br>
               </div>
             </li>
             <li>
-              <div class="collapsible-header"><i class="material-icons">security</i>Change Password</div>
+              <div class="collapsible-header grey-text text-lighten-5"><i class="material-icons">security</i>Change Password</div>
               <div class="collapsible-body">
                 <div class="row">
                   <div class="input-field col s12 m9">
@@ -67,15 +70,15 @@
                     <label for="confirmPassword">Confirm New Password</label>
                   </div>
                 </div>
-                <button id="updatePassword" class="waves-effect waves-light btn">Update Account</button>
+                <button id="updatePassword" class="update waves-effect waves-light btn right">Update Account</button>
                 <br></br>
               </div>
             </li>
             <li>
-              <div class="collapsible-header"><i class="material-icons">delete_forever</i>Delete Account</div>
+              <div class="collapsible-header grey-text text-lighten-5"><i class="material-icons">delete_forever</i>Delete Account</div>
               <div class="collapsible-body">
-                <p class="normal">Are you sure you would like to delete your account? You will not be able to recover your personal player record <strong>ever</strong> again.</p>
-                <button id="deleteAccount" class="waves-effect waves-light btn">Delete Account</button>
+                <p class="normal">Are you sure you would like to delete your account? You will not be able to recover your personal player record <strong><em>ever</em></strong> again.</p>
+                <button id="deleteAccount" class="update waves-effect waves-light btn right">Delete Account</button>
                 <br></br>
               </div>
             </li>

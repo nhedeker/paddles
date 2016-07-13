@@ -19,19 +19,19 @@
 }
 
 /*Registration & Login Main Buttons*/
-.starter {
+.starter, .starter.btn-large:focus{
   margin-left: 10px;
   margin-right: 10px;
   background-color: #d41d3b;
 }
 
-/*Overall Registration Modal*/
-#registration, #login {
-  background-color: #d41d3b;
+.starter.btn-large:hover {
+  background-color: #bf1a35;
 }
 
-.btn-large:hover {
-  background-color: #e53935;
+/*Overall Registration & Login Modal*/
+#registration, #login {
+  background-color: #d41d3b;
 }
 
 /* label focus color */
@@ -85,8 +85,12 @@ h1 {
   font-family: 'sports_worldregular';
 }
 
-.collapsible-header, button {
+.collapsible-header, button, .modal-close {
   font-family: 'octin_sports_rgregular';
+}
+
+.modal-close {
+  font-size: 20px;
 }
 
 html {
