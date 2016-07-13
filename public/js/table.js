@@ -1,6 +1,7 @@
 'use strict';
 
 (function() {
+  $('select').material_select();
   const cardBuilder = function(game) {
     const $cardCol = $('<div class="col s6 m4 l3">');
     const $cardPan = $('<div class="card-panel red" style="height:27vh">');
