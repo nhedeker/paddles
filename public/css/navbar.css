@@ -4,3 +4,7 @@ nav .brand-logo {
   font-size: 1.75rem;
   padding-left: 15px;
 }
+
+nav li {
+  height: 64px;
+}

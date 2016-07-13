@@ -9,23 +9,43 @@
   /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
 }
 
+.container {
+  padding-left: 0px;
+  padding-right: 20px;
+  padding-bottom: 5vh;
+  margin-top: 10vh;
+  padding-top: 2vh;
+  border-radius: 50%;
+}
+
+/*Registration & Login Main Buttons*/
 .starter {
   margin-left: 10px;
   margin-right: 10px;
+  background-color: #d41d3b;
+}
+
+/*Overall Registration Modal*/
+#registration, #login {
+  background-color: #d41d3b;
+}
+
+.btn-large:hover {
+  background-color: #e53935;
 }
 
 /* label focus color */
 .input-field input[type=text]:focus + label,
 .input-field input[type=email]:focus + label,
 .input-field input[type=password]:focus + label{
-  color: darkgoldenrod;
+  color: goldenrod;
 }
 /* label underline focus color */
 .input-field input[type=text]:focus,
 .input-field input[type=email]:focus,
 .input-field input[type=password]:focus{
-  border-bottom: 1px darkgoldenrod;
-  box-shadow: 0 1px 0 0 darkgoldenrod;
+  border-bottom: 1px goldenrod;
+  box-shadow: 0 1px 0 0 goldenrod;
 }
 /* valid color */
 .input-field input[type=text].valid,
@@ -43,11 +63,11 @@
 }
 /* icon prefix focus color */
 .input-field .prefix.active {
-  color: darkgoldenrod;
+  color: goldenrod;
 }
 
 /*.active {
-  color: darkgoldenrod;
+  color: goldenrod;
 }*/
 
 h1, #title {
@@ -58,10 +78,42 @@ h1, #title {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
 }
 
 h1 {
-  color: #B8860F;
-  /*color: #B8860B;*/
+  color: #ac8248;
+  font-family: 'sports_worldregular';
+}
+
+.collapsible-header, button {
+  font-family: 'octin_sports_rgregular';
+}
+
+html {
+  min-height: 100%
+}
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    wheat,
+    wheat 10px,
+    #EFE7D8 10px,
+    #EFE7D8 20px
+  );
+}
+
+@font-face {
+    font-family: 'sports_worldregular';
+    src: url('../fonts/sportsWorld/sports_world-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sportsWorld/sports_world-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'octin_sports_rgregular';
+    src: url('../fonts/sportsRegular/octin_sports_rg-webfont.woff2') format('woff2'),
+         url('../fonts/sportsRegular/octin_sports_rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
