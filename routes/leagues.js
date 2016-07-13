@@ -2,7 +2,6 @@
 
 /* eslint-disable camelcase, quote-props */
 
-const fs = require('fs');
 const ev = require('express-validation');
 const validations = require('../validations/leagues');
 const bcrypt = require('bcrypt-as-promised');
@@ -117,19 +116,27 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
               'From': 'paddles@kenmcgrady.com',
               'To': playerEmail,
               'Subject': 'Welcome to Paddles!',
+
+              // eslint-disable-next-line max-len
               'HtmlBody': '<h3>Hello! Welcome to Paddles!</h3><br></br><p>Thank you for signing up! We hope you enjoy the site!</p><br></br><p>Sincerely,</p><p>The Paddles Team</p>',
+
+              // eslint-disable-next-line max-len, no-useless-escape
               'TextBody': 'Hello! Welcome to Paddles!\Thank you for signing up! We hope you enjoy the site!\Sincerely,\The Paddles Team',
               'ReplyTo': 'paddles@kenmcgrady.com'
             }
           };
+
+          // eslint-disable-next-line no-shadow
           request(options, (err, res, body) => {
             if (err) {
+              // eslint-disable-next-line no-console
               console.error(err);
-              console.log('There was an error in sending the email');
-              console.log(err);
             }
 
+            // eslint-disable-next-line no-console
             console.log('Response from Email: ', res.statusCode);
+
+            // eslint-disable-next-line no-console
             console.log(body);
           });
           res.sendStatus(200);
