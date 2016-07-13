@@ -1,0 +1,13 @@
+#settings {
+  margin-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: tan;
+  font-size: 17px;
+}
+
+li {
+  height: 64px;
+}

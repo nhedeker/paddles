@@ -1,0 +1,67 @@
+.loginthing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#updateEmail, #updatePassword, #deleteAccount {
+  margin-left: 10px;
+  /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
+}
+
+.starter {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label{
+  color: darkgoldenrod;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus{
+  border-bottom: 1px darkgoldenrod;
+  box-shadow: 0 1px 0 0 darkgoldenrod;
+}
+/* valid color */
+.input-field input[type=text].valid,
+.input-field input[type=email].valid,
+.input-field input[type=password].valid{
+  border-bottom: 1px solid green;
+  box-shadow: 0 1px 0 0 green;
+}
+/* invalid color */
+.input-field input[type=text].invalid,
+.input-field input[type=email].invalid,
+.input-field input[type=password].invalid{
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: darkgoldenrod;
+}
+
+/*.active {
+  color: darkgoldenrod;
+}*/
+
+h1, #title {
+  margin-bottom: 0px;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+h1 {
+  color: #B8860F;
+  /*color: #B8860B;*/
+}

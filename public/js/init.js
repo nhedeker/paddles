@@ -10,7 +10,7 @@
   });
 
   if (window.COOKIES.loggedIn) {
-    $('.session').text('Logout').click((_event) => {
+    $('.sessionLogout').click((_event) => {
       const $xhr = $.ajax({
         url: '/session',
         type: 'DELETE'
@@ -29,4 +29,5 @@
       });
     });
   }
+  $('.button-collapse').sideNav();
 })();
