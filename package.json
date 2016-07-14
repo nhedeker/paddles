@@ -6,7 +6,9 @@
   "scripts": {
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
-    "lint": "eslint"
+    "lint": "eslint",
+    "nodemon": "nodemon server.js",
+    "nf": "nf start"
   },
   "author": "Natasha Hedeker <natasha.hedeker@gmail.com>",
   "license": "MIT",
@@ -25,11 +27,15 @@
     "pg": "^6.0.1",
     "request": "^2.73.0"
   },
+  "engines": {
+    "node": "6.3.0"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "dotenv": "^2.0.0",
     "eslint": "^3.0.1",
     "eslint-config-ryansobol": "^7.4.0",
+    "foreman": "^1.4.1",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2"
   }
