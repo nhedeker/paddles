@@ -1,31 +1,29 @@
-.loginthing {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  wrap: wrap;
-}
-
 #updateEmail, #updatePassword, #deleteAccount {
   margin-left: 10px;
   /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
 }
 
-.container {
+#loginthing {
   padding-bottom: 5vh;
   margin-top: 10vh;
   padding-top: 2vh;
   border-radius: 50%;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  wrap: wrap;
+  flex-direction: column;
 }
 
 @media (max-width: 780px) {
-  .container {
+  #loginthing {
     border-radius: 0%;
   }
 }
 
 @media (max-width: 580px) {
-  .container {
+  #loginthing {
     padding-left: 1vh;
     padding-right: 1vh;
     border-radius: 0%;
