@@ -15,10 +15,6 @@
     });
 
     $xhrSettings.done((player) => {
-      if ($xhrSettings.status !== 200) {
-        return Materialize.toast('SNAFU in retrieving player information.');
-      }
-
       $('#firstName').text(`First Name: ${player.first_name}`);
       $('#lastName').text(`Last Name: ${player.last_name}`);
       $('#email').text(`Email: ${player.email}`);
@@ -38,7 +34,11 @@
     });
 
     // eslint-disable-next-line max-len
-    $xhrSettings.fail(() => Materialize.toast('The server broke in retrieving user information. Our apologies.'));
+    $xhrSettings.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
+    });
   };
 
   $(document).ready(() => {
@@ -54,12 +54,6 @@
     });
 
     $xhr.done(() => {
-      if ($xhr.status !== 200) {
-        Materialize.toast('SNAFU at updating a player');
-
-        return false;
-      }
-
       let text;
 
       if (url.includes('email')) {
@@ -125,18 +119,13 @@
       });
 
       $xhr.done(() => {
-        if ($xhr.status !== 200) {
-          Materialize.toast('SNAFU at deleting a player');
-
-          return;
-        }
-
         window.location.href = '/';
       });
 
-      $xhr.fail(() => {
-        // eslint-disable-next-line max-len
-        Materialize.toast('The server broke while deleting player account. Our apologies.');
+      $xhr.fail((jqXHR, textStatus, _error) => {
+        Materialize.toast('Error: ', jqXHR.responseText);
+
+        return false;
       });
     });
   };

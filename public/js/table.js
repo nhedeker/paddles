@@ -20,12 +20,6 @@
 
 // eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
-      if ($xhrRecent.status !== 200) {
-        Materialize.toast('Something went wrong');
-
-        return;
-      }
-
       const $row = $('<div class="row">');
 
       for (const game of recentGames) {
@@ -36,31 +30,31 @@
         const $scoresTr = $('<tr>');
         const $players2Tr = $('<tr>');
 
-        if (!cardSwitch) {
-          $cardPan.addClass('redCard');
-          cardSwitch = 1;
-        }
-        else {
+        if (cardSwitch) {
           $cardPan.addClass('goldCard');
           cardSwitch = 0;
         }
+        else {
+          $cardPan.addClass('redCard');
+          cardSwitch = 1;
+        }
 
         $players1Tr.append($(`<td><p class="gameps">${game.t1p1_first_name}</p><p class="gameps">${game.t1p1_last_name}</p></td>`));
-        $players1Tr.append($(`<td><p class="gameps">${game.t2p1_first_name}</p><p class="gameps">${game.t2p1_last_name}</p></td>`))
+        $players1Tr.append($(`<td><p class="gameps">${game.t2p1_first_name}</p><p class="gameps">${game.t2p1_last_name}</p></td>`));
 
         $scoresTr.append($(`<td>${game.team1_score}</td>`));
         $scoresTr.append($(`<td>${game.team2_score}</td>`));
 
-        $table.append($players1Tr)
+        $table.append($players1Tr);
 
         if (game.t1p2_first_name && game.t2p2_first_name) {
           $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t1p2_first_name}</p><p class="gameps">${game.t1p2_last_name}</p></td>`));
           $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t2p2_first_name}</p><p class="gameps">${game.t2p2_last_name}</p></td>`));
-          $scoresTr.children().addClass('player2score')
+          $scoresTr.children().addClass('player2score');
         }
         else {
-          $players2Tr.append($('<td>'))
-          $scoresTr.children().addClass('player1score')
+          $players2Tr.append($('<td>'));
+          $scoresTr.children().addClass('player1score');
         }
 
         $table.append($players2Tr);
@@ -74,8 +68,10 @@
       $('#recentGames').append($row);
     });
 
-    $xhrRecent.fail((jqXHR, textStatus, error) => {
-      Materialize.toast('Error: ', error);
+    $xhrRecent.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
     });
   };
 
@@ -84,12 +80,6 @@
 
 // eslint-disable-next-line max-statements
     $xhrLeaderboard.done((playerResults) => {
-      if ($xhrLeaderboard.status !== 200) {
-        Materialize.toast('Something went wrong');
-
-        return;
-      }
-
       const $table = $('<table class="striped centered">');
       const $thead = $('<thead><th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
       const $tbody = $('<tbody>');
@@ -119,8 +109,10 @@
       }
     });
 
-    $xhrLeaderboard.fail((jqXHR, textStatus, error) => {
-      Materialize.toast('Error: ', error);
+    $xhrLeaderboard.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
     });
   };
 
@@ -180,10 +172,6 @@
     });
 
     $xhrGame.done(() => {
-      if ($xhrGame.status !== 200) {
-        return Materialize.toast('Something went wrong.');
-      }
-
       $('#leaderboard').empty();
       $('#recentGames').empty();
       tableBuilder();
@@ -204,10 +192,6 @@
     });
 
     $xhrLeague.done((league) => {
-      if ($xhrLeague.status !== 200) {
-        return Materialize.toast('Something went wrong.');
-      }
-
       if (!league.startsWith('The') && !league.startsWith('the')) {
         league = `THE ${league}`;
       }

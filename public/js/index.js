@@ -23,17 +23,13 @@
     });
 
     $xhr.done(() => {
-      if ($xhr.status !== 200) {
-        Materialize.toast('SNAFU at creating a player');
-
-        return;
-      }
-
       Materialize.toast('Your account has been created! Please login.');
     });
 
-    $xhr.fail(() => {
-      Materialize.toast('The server broke in player creation. Our apologies.');
+    $xhr.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
     });
   };
 
@@ -47,10 +43,6 @@
     });
 
     $xhrLeague.done(() => {
-      if ($xhrLeague.status !== 200) {
-        return Materialize.toast('SNAFU Creating a League');
-      }
-
       Materialize.toast('New League Created');
 
       // eslint-disable-next-line max-len
@@ -58,7 +50,11 @@
     });
 
     // eslint-disable-next-line max-len
-    $xhrLeague.fail(() => Materialize.toast('The server broke in league creation. Our apologies.'));
+    $xhrLeague.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
+    });
   };
 
   $('.login-button').click((_event) => {
@@ -85,17 +81,13 @@
     });
 
     $xhr.done(() => {
-      if ($xhr.status !== 200) {
-        Materialize.toast('SNAFU');
-
-        return;
-      }
-
       window.location.href = '/table.html';
     });
 
-    $xhr.fail(() => {
-      Materialize.toast('The server broke. Our apologies.');
+    $xhr.fail((jqXHR, textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+
+      return false;
     });
   });
 

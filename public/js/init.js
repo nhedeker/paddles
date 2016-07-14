@@ -17,10 +17,6 @@
       });
 
       $xhr.done(() => {
-        if ($xhr.status !== 200) {
-          return Materialize.toast('Unable to log out. Please try again.');
-        }
-
         window.location.href = '/';
       });
 
