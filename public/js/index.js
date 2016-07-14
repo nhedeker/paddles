@@ -2,7 +2,7 @@
 
 (function() {
   if (window.COOKIES.loggedIn) {
-    window.location.href = '/table.html';
+    window.location.href = '/league.html';
 
     return;
   }
@@ -81,7 +81,7 @@
     });
 
     $xhr.done(() => {
-      window.location.href = '/table.html';
+      window.location.href = '/league.html';
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
