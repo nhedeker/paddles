@@ -56,16 +56,16 @@ module.exports.postGame = {
   body: {
     team1P1Id: Joi.number()
       .label('Team 1 Player 1')
-      .required()
-      .integer(),
-    team1P2Id: Joi.number()
+      .integer()
+      .required(),
+    team1P2Id: Joi.number().allow(null)
       .label('Team 1 Player 2')
       .integer(),
     team2P1Id: Joi.number()
       .label('Team 2 Player 1')
-      .required()
-      .integer(),
-    team2P2Id: Joi.number()
+      .integer()
+      .required(),
+    team2P2Id: Joi.number().allow(null)
       .label('Team 2 Player 2')
       .integer(),
     team1Score: Joi.number()

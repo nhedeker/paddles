@@ -32,65 +32,53 @@
 
     <div class="container">
       <div class="row">
-        <a class="waves-effect waves-light btn-large col s6 offset-s3 modal-trigger" href="#modal1">Add Game</a>
+        <a class="waves-effect waves-light btn-large col s6 offset-s3 modal-trigger" href="#addgamemodal">Add Game</a>
       </div>
     </div>
     <!-- Modal Trigger -->
 
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <div id="addgamemodal" class="modal">
       <div class="modal-content">
         <div class="row">
           <div class="input-field col s6">
-            <select>
-              <option value="null" selected>None</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+            <select class="addchoice player1">
+              <option value="null">None</option>
             </select>
-            <label>Player 1</label>
+            <label>Team 1 - Player 1</label>
           </div>
           <div class="input-field col s6">
-            <select>
-              <option value="null" selected>None</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+            <select class="addchoice player3">
+              <option value="null">None</option>
             </select>
-            <label>Player 2</label>
+            <label>Team 2 - Player 1</label>
           </div>
           <div class="input-field col s6">
-            <select>
-              <option value="null" selected>None</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+            <select class="addchoice player2">
+              <option value="null">None</option>
             </select>
-            <label>Player 3</label>
+            <label>Team 1 - Player 2</label>
           </div>
           <div class="input-field col s6">
-            <select>
-              <option value="null" selected>None</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+            <select class="addchoice player4">
+              <option value="null">None</option>
             </select>
-            <label>Player 4</label>
+            <label>Team 2 - Player 2</label>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="number">
+            <input id="icon_prefix" class="score1" type="number">
             <label for="icon_prefix">Team 1 Score</label>
           </div>
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="number">
+            <input id="icon_prefix" class="score2" type="number">
             <label for="icon_prefix">Team 2 Score</label>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+        <a href="#!" class=" modal-action waves-effect waves-green btn-flat submit">Submit</a>
       </div>
     </div>
 

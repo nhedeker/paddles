@@ -11,6 +11,7 @@
   "author": "Natasha Hedeker <natasha.hedeker@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "arpad": "^0.1.2",
     "bcrypt": "^0.8.7",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.15.2",
