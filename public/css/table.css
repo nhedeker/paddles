@@ -20,7 +20,7 @@ html {
 }
 
 #recentGames {
-  margin-top: 3vh;
+  margin-top: 6vh;
 }
 
 .redCard {
@@ -168,4 +168,10 @@ h3 {
 
 .winningscore {
   color: #dead68;
+}
+
+#recentGamesTitle {
+  font-family: 'octin_sports_rgregular';
+  font-size: 2.3rem;
+  margin-bottom: 2.75vh;
 }
