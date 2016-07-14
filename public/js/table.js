@@ -183,7 +183,36 @@
     });
   };
 
+  const leagueBuilder = function() {
+    const $xhrLeague = $.ajax({
+      url: '/league',
+      contentType: 'application/json',
+      type: 'GET'
+    });
+
+    $xhrLeague.done((league) => {
+      if ($xhrLeague.status !== 200) {
+        return Materialize.toast('Something went wrong.');
+      }
+
+      if (!league.startsWith('The') && !league.startsWith('the')) {
+        league = `THE ${league}`;
+      }
+
+      if (!league.endsWith('League') && !league.endsWith('league')) {
+        league = `${league} LEAGUE`;
+      }
+
+      $('h3').text(league.toUpperCase());
+    });
+
+    $xhrLeague.fail((jqXHR, _textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
+    });
+  };
+
   $(document).ready(() => {
+    leagueBuilder();
     tableBuilder();
     cardBuilder();
     $('.addchoice').change(dropdownDisabler);

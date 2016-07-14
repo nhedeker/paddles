@@ -32,17 +32,29 @@
     </nav>
 
     <!-- Modal Trigger -->
-    <div class="container">
-      <div class="row">
-        <a class="waves-effect waves-light btn-large col s6 offset-s3 modal-trigger" href="#addgamemodal">Add Game</a>
-      </div>
+    <div class="fixed-action-btn">
+      <a id="addGameBtn" href="#addgamemodal" class="z-depth-1 modal-trigger btn-floating btn-large">
+        <i class="large material-icons">add</i>
+      </a>
     </div>
 
-    <!-- Leaderboard Container -->
-    <div class="container" id="leaderboard"></div>
+    <div class="container z-depth-2">
+        <div class="center">
+          <!-- League Title -->
+          <u id="leagueName"><h3></h3></u>
+        </div>
 
-    <!-- Games Container -->
-    <div class="container" id="recentGames"></div>
+        <!-- Modal Trigger on Smaller Viewports -->
+        <div id="addGameBtn2" class="center">
+          <a class="waves-effect waves-light btn-large col s6 offset-s3 modal-trigger" href="#addgamemodal">Add Game</a>
+        </div>
+
+        <!-- Leaderboard Container -->
+        <div id="leaderboard" class= "z-depth-1"></div>
+
+        <!-- Games Container -->
+        <div id="recentGames"></div>
+    </div>
 
     <!-- Modal Structure -->
     <div id="addgamemodal" class="modal">

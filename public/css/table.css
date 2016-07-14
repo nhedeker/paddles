@@ -13,16 +13,14 @@ html {
 }
 
 #leaderboard {
+  margin-top: 4.5vh;
   background-color: white;
-  border-radius: 3vh;
-}
-
-table {
-  border-radius: 3vh;
+  border-radius: 2vh;
+  border: 10px solid #d41d3b;
 }
 
 #recentGames {
-  margin-top: 2vh;
+  margin-top: 3vh;
 }
 
 .redCard {
@@ -30,5 +28,93 @@ table {
 }
 
 .goldCard {
-  background-color: color: #ac8248;
+  background-color: #ac8248;
+}
+
+th {
+  font-family: 'sports_worldregular';
+  /*color: #d41d3b;*/
+}
+
+thead {
+  color: #ac8248;
+  font-size: 3.5vh;
+}
+
+tbody {
+  font-size: 2.5vh;
+}
+
+.fixed-action-btn {
+  top: 10vh;
+  left: 10vh;
+}
+
+td {
+  color: black;
+}
+
+#leagueName {
+  font-family: 'sports_worldregular';
+  color: firebrick;
+  padding-bottom: 1vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.75);
+  padding-left: 5vh;
+  padding-right: 5vh;
+  padding-top: .9vh;
+  margin-top: 2vh;
+  padding-bottom: 1vh;
+  margin-bottom: 5vh;
+}
+
+h3 {
+  margin-top: 1vh;
+}
+
+#addGameBtn {
+  background-color: #ef5350;
+}
+
+.btn-floating i {
+  color: white;
+}
+
+/*table.striped>tbody>tr:nth-child(odd){
+  background-color: #EFE7D8;
+}*/
+
+@font-face {
+    font-family: 'octin_sports_rgregular';
+    src: url('../fonts/sportsRegular/octin_sports_rg-webfont.woff2') format('woff2'),
+         url('../fonts/sportsRegular/octin_sports_rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'sports_worldregular';
+    src: url('../fonts/sportsWorld/sports_world-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sportsWorld/sports_world-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#addGameBtn2 {
+  margin-top: 4vh;
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .fixed-action-btn {
+    display: none;
+  }
+  #addGameBtn2 {
+    display: inherit;
+  }
+  #addGameBtn2 a {
+    background-color: #b89000;
+  }
 }
