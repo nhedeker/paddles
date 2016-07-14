@@ -117,4 +117,30 @@ h3 {
   #addGameBtn2 a {
     background-color: #b89000;
   }
+
+.gameps {
+  margin-top: .2vh;
+  margin-bottom: .2vh;
+  color: white;
+}
+
+.gameCard {
+  border-radius: 5px;
+  border: 2px solid black;
+}
+
+.player2td {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.player1score {
+  padding-top: 2.15rem;
+  padding-bottom: 0px;
+  color: white;
+}
+
+.player2score {
+  padding-bottom: 0px;
+  color: white;
 }

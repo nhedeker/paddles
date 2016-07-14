@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 (function() {
   let initialized = 0;
+  let cardSwitch = 0;
 
   const dropdownBuilder = function(players, target) {
     for (const player of players) {
@@ -29,32 +30,44 @@
 
       for (const game of recentGames) {
         const $cardCol = $('<div class="col s6 m4 l3">');
-        const $cardPan = $('<div class="card-panel red" style="height:27vh">');
-        const $innerRow = $('<div class="white-text row">');
-        const $leftCol = $('<div class="col s5" style="text-align:center">');
-        const $centerCol = $('<div class="col s2" style="margin-top:5vh; text-align:left">');
-        const $rightCol = $('<div class="col s5" style="text-align:center">');
-        let modifier = 1;
+        const $cardPan = $('<div class="card-panel gameCard">');
+        const $table = $('<table class="centered">');
+        const $players1Tr = $('<tr>');
+        const $scoresTr = $('<tr>');
+        const $players2Tr = $('<tr>');
 
-        if (!game.t1p2_first_name && !game.t2p2_first_name) {
-          modifier = 1.2;
+        if (!cardSwitch) {
+          $cardPan.addClass('redCard');
+          cardSwitch = 1;
+        }
+        else {
+          $cardPan.addClass('goldCard');
+          cardSwitch = 0;
         }
 
-        $leftCol.append($(`<p style="font-size:${2 * modifier}vh">${game.t1p1_first_name} ${game.t1p1_last_name}</p>`));
-        $rightCol.append($(`<p style="font-size:${2 * modifier}vh">${game.t2p1_first_name} ${game.t2p1_last_name}</p>`));
+        $players1Tr.append($(`<td><p class="gameps">${game.t1p1_first_name}</p><p class="gameps">${game.t1p1_last_name}</p></td>`));
+        $players1Tr.append($(`<td><p class="gameps">${game.t2p1_first_name}</p><p class="gameps">${game.t2p1_last_name}</p></td>`))
+
+        $scoresTr.append($(`<td>${game.team1_score}</td>`));
+        $scoresTr.append($(`<td>${game.team2_score}</td>`));
+
+        $table.append($players1Tr)
 
         if (game.t1p2_first_name && game.t2p2_first_name) {
-          $leftCol.append($(`<p style="font-size:2vh">${game.t1p2_first_name} ${game.t1p2_last_name}</p>`));
-          $rightCol.append($(`<p style="font-size:2vh">${game.t2p2_first_name} ${game.t2p2_last_name}</p>`));
+          $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t1p2_first_name}</p><p class="gameps">${game.t1p2_last_name}</p></td>`));
+          $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t2p2_first_name}</p><p class="gameps">${game.t2p2_last_name}</p></td>`));
+          $scoresTr.children().addClass('player2score')
+        }
+        else {
+          $players2Tr.append($('<td>'))
+          $scoresTr.children().addClass('player1score')
         }
 
-        $leftCol.append($(`<p style="font-size:${2.5 * modifier}vh">${game.team1_score}</p>`));
-        $rightCol.append($(`<p style="font-size:${2.5 * modifier}vh">${game.team2_score}</p>`));
-        $centerCol.append($(`<p style="font-size:${2.5 * modifier}vh">VS</p>`));
-        $innerRow.append($leftCol).append($centerCol).append($rightCol);
-        $cardPan.append($innerRow);
-        $cardCol.append($cardPan);
+        $table.append($players2Tr);
+        $table.append($scoresTr);
 
+        $cardPan.append($table);
+        $cardCol.append($cardPan);
         $row.append($cardCol);
       }
 
