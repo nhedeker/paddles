@@ -51,7 +51,7 @@ thead {
 }
 
 td {
-  color: black;
+  color: #424242;
 }
 
 #leagueName {
@@ -174,4 +174,5 @@ h3 {
   font-family: 'octin_sports_rgregular';
   font-size: 2.3rem;
   margin-bottom: 2.75vh;
+  color: #363535;
 }
