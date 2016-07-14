@@ -3,7 +3,6 @@
 /* eslint-disable max-len */
 (function() {
   let initialized = 0;
-  let cardSwitch = 0;
 
   const dropdownBuilder = function(players, target) {
     for (const player of players) {
@@ -21,6 +20,7 @@
     // eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
       const $row = $('<div class="row">');
+
       for (let i = 0; i < 6; i++) {
         const $cardCol = $('<div class="col s6 m6 l4">');
         const $cardPan = $('<div class="card-panel gameCard redCard z-depth-1">');
@@ -30,10 +30,10 @@
         const $players2Tr = $('<tr>');
 
         $players1Tr.append($(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`));
-        $players1Tr.append($(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`))
+        $players1Tr.append($(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`));
 
-        const $team1Score = $(`<td class="rightborder">${recentGames[i].team1_score}</td>`)
-        const $team2Score = $(`<td>${recentGames[i].team2_score}</td>`)
+        const $team1Score = $(`<td class="rightborder">${recentGames[i].team1_score}</td>`);
+        const $team2Score = $(`<td>${recentGames[i].team2_score}</td>`);
 
         if (recentGames[i].team1_score > recentGames[i].team2_score) {
           $team1Score.addClass('winningscore');
@@ -50,12 +50,12 @@
         if (recentGames[i].t1p2_first_name && recentGames[i].t2p2_first_name) {
           $players2Tr.append($(`<td class="rightborder player2td"><p class="gameps">${recentGames[i].t1p2_first_name}</p><p class="gameps">${recentGames[i].t1p2_last_name}</p></td>`));
           $players2Tr.append($(`<td class="player2td"><p class="gameps">${recentGames[i].t2p2_first_name}</p><p class="gameps">${recentGames[i].t2p2_last_name}</p></td>`));
-          $scoresTr.children().addClass('player2score')
-          $players1Tr.children().addClass('player2tdtop')
+          $scoresTr.children().addClass('player2score');
+          $players1Tr.children().addClass('player2tdtop');
         }
         else {
-          $players2Tr.append($('<td class="empty rightborder">'))
-          $scoresTr.children().addClass('player1score')
+          $players2Tr.append($('<td class="empty rightborder">'));
+          $scoresTr.children().addClass('player1score');
         }
 
         $table.append($players2Tr);
@@ -73,7 +73,7 @@
     });
 
     $xhrRecent.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast('Error: ', jqXHR.responseText, 4000);
 
       return false;
     });
@@ -87,13 +87,15 @@
       const $table = $('<table class="striped centered">');
       const $thead = $('<thead><th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
       const $tbody = $('<tbody>');
+      let rankCount = 1;
 
       for (let i = 0; i < playerResults.length; i++) {
         if (playerResults[i].elo) {
           const name = `${playerResults[i].first_name} ${playerResults[i].last_name}`;
           const elo = playerResults[i].elo;
-          const $newRow = $(`<tr><td>${i + 1}</td><td>${name}</td><td>${elo}</td>`);
+          const $newRow = $(`<tr><td>${rankCount}</td><td>${name}</td><td>${elo}</td>`);
 
+          rankCount += 1;
           $tbody.append($newRow);
         }
       }
@@ -114,7 +116,7 @@
     });
 
     $xhrLeaderboard.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast('Error: ', jqXHR.responseText, 4000);
 
       return false;
     });
@@ -176,7 +178,7 @@
     });
 
     $xhrGame.done(() => {
-      Materialize.toast('Game was submitted successfully!');
+      Materialize.toast('Game was submitted successfully!', 2000);
       $('#leaderboard').empty();
       $('#recentGames').empty();
       tableBuilder();
@@ -185,7 +187,7 @@
     });
 
     $xhrGame.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast('Error: ', jqXHR.responseText, 4000);
     });
   };
 
@@ -209,7 +211,7 @@
     });
 
     $xhrLeague.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast('Error: ', jqXHR.responseText, 4000);
     });
   };
 
