@@ -13,6 +13,7 @@
     <title>SITE TITLE</title>
   </head>
   <body>
+    <!-- NavBar -->
     <nav class="z-depth-2">
       <div class="nav-wrapper">
         <a href="table.html" class="brand-logo">site title</a>
@@ -30,12 +31,18 @@
       </div>
     </nav>
 
+    <!-- Modal Trigger -->
     <div class="container">
       <div class="row">
         <a class="waves-effect waves-light btn-large col s6 offset-s3 modal-trigger" href="#addgamemodal">Add Game</a>
       </div>
     </div>
-    <!-- Modal Trigger -->
+
+    <!-- Leaderboard Container -->
+    <div class="container" id="leaderboard"></div>
+
+    <!-- Games Container -->
+    <div class="container" id="recentGames"></div>
 
     <!-- Modal Structure -->
     <div id="addgamemodal" class="modal">
@@ -81,10 +88,6 @@
         <a href="#!" class=" modal-action waves-effect waves-green btn-flat submit">Submit</a>
       </div>
     </div>
-
-    <div class="container" id="leaderboard"></div>
-
-    <div class="container" id="recentGames"></div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>

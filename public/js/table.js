@@ -77,8 +77,8 @@
         return;
       }
 
-      const $table = $('<table>');
-      const $thead = $('<th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
+      const $table = $('<table class="striped centered">');
+      const $thead = $('<thead><th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
       const $tbody = $('<tbody>');
 
       for (let i = 0; i < playerResults.length; i++) {

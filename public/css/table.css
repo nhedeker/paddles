@@ -1,1 +1,34 @@
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    wheat,
+    wheat 10px,
+    #EFE7D8 10px,
+    #EFE7D8 20px
+  );
+}
 
+html {
+  min-height: 100%
+}
+
+#leaderboard {
+  background-color: white;
+  border-radius: 3vh;
+}
+
+table {
+  border-radius: 3vh;
+}
+
+#recentGames {
+  margin-top: 2vh;
+}
+
+.redCard {
+  background-color: #d41d3b;
+}
+
+.goldCard {
+  background-color: color: #ac8248;
+}
