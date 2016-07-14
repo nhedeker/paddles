@@ -176,14 +176,14 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
     league_id: req.session.leagueId
   };
 
-  if (team1P2Id && team2P2Id) {
+  if ((team1P2Id && team2P2Id) && !(team1P2Id === 'null' && team2P2Id === 'null')) {
     newGame.team1_p2_id = team1P2Id;
     newGame.team2_p2_id = team2P2Id;
   }
 
   let eloArray;
 
-  if (team1P2Id && team2P2Id) {
+  if ((team1P2Id && team2P2Id) && !(team1P2Id === 'null' && team2P2Id === 'null')) {
     eloArray = [
       team1P1Id,
       team1P2Id,

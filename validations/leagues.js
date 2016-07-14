@@ -58,14 +58,14 @@ module.exports.postGame = {
       .label('Team 1 Player 1')
       .integer()
       .required(),
-    team1P2Id: Joi.number().allow(null)
+    team1P2Id: Joi.number().allow(null).allow('null')
       .label('Team 1 Player 2')
       .integer(),
     team2P1Id: Joi.number()
       .label('Team 2 Player 1')
       .integer()
       .required(),
-    team2P2Id: Joi.number().allow(null)
+    team2P2Id: Joi.number().allow(null).allow('null')
       .label('Team 2 Player 2')
       .integer(),
     team1Score: Joi.number()
