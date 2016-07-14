@@ -1,102 +1,3 @@
-#updateEmail, #updatePassword, #deleteAccount {
-  margin-left: 10px;
-  /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
-}
-
-#loginthing {
-  padding-bottom: 5vh;
-  margin-top: 10vh;
-  padding-top: 2vh;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  wrap: wrap;
-  flex-direction: column;
-}
-
-@media (max-width: 780px) {
-  #loginthing {
-    border-radius: 0%;
-  }
-}
-
-@media (max-width: 580px) {
-  #loginthing {
-    padding-left: 1vh;
-    padding-right: 1vh;
-    border-radius: 0%;
-    width: 100%;
-  }
-}
-
-
-/*Registration & Login Main Buttons*/
-.starter, .starter.btn-large:focus{
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: #d41d3b;
-}
-
-.starter.btn-large:hover {
-  background-color: #bf1a35;
-}
-
-/*Overall Registration & Login Modal*/
-.modal {
-  background-color: #d41d3b;
-}
-
-/* label focus color */
-.input-field input[type=text]:focus + label,
-.input-field input[type=email]:focus + label,
-.input-field input[type=password]:focus + label{
-  color: goldenrod;
-}
-/* label underline focus color */
-.input-field input[type=text]:focus,
-.input-field input[type=email]:focus,
-.input-field input[type=password]:focus{
-  border-bottom: 1px goldenrod;
-  box-shadow: 0 1px 0 0 goldenrod;
-}
-/* valid color */
-.input-field input[type=text].valid,
-.input-field input[type=email].valid,
-.input-field input[type=password].valid{
-  border-bottom: 1px solid green;
-  box-shadow: 0 1px 0 0 green;
-}
-/* invalid color */
-.input-field input[type=text].invalid,
-.input-field input[type=email].invalid,
-.input-field input[type=password].invalid{
-  border-bottom: 1px solid red;
-  box-shadow: 0 1px 0 0 red;
-}
-/* icon prefix focus color */
-.input-field .prefix.active {
-  color: goldenrod;
-}
-
-h1 {
-  margin-bottom: 0px;
-  color: #ac8248;
-  font-family: 'sports_worldregular';
-}
-
-.collapsible-header, button, .modal-close {
-  font-family: 'octin_sports_rgregular';
-}
-
-.modal-close {
-  font-size: 20px;
-}
-
-html {
-  min-height: 100%
-}
 body {
   background: repeating-linear-gradient(
     45deg,
@@ -105,6 +6,15 @@ body {
     #EFE7D8 10px,
     #EFE7D8 20px
   );
+}
+
+button, .collapsible-header, .modal-close {
+  font-family: 'octin_sports_rgregular';
+}
+
+#deleteAccount, #updateEmail, #updatePassword {
+  margin-left: 10px;
+  /*FIGURE OUT WAY TO MAKE BUTTON ALIGN TO RIGHT*/
 }
 
 @font-face {
@@ -121,4 +31,95 @@ body {
          url('../fonts/sportsRegular/octin_sports_rg-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+h1 {
+  margin-bottom: 0px;
+  color: #ac8248;
+  font-family: 'sports_worldregular';
+}
+
+html {
+  min-height: 100%
+}
+
+/* form label underline focus color */
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus,
+.input-field input[type=text]:focus {
+  border-bottom: 1px goldenrod;
+  box-shadow: 0 1px 0 0 goldenrod;
+}
+
+/* form label focus color */
+/* form icon prefix focus color */
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label,
+.input-field input[type=text]:focus + label,
+.input-field .prefix.active {
+  color: goldenrod;
+}
+
+/* form invalid color */
+.input-field input[type=email].invalid,
+.input-field input[type=password].invalid,
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}
+
+/* form valid color */
+.input-field input[type=email].valid,
+.input-field input[type=password].valid,
+.input-field input[type=text].valid {
+  border-bottom: 1px solid green;
+  box-shadow: 0 1px 0 0 green;
+}
+
+#loginthing {
+  padding-bottom: 5vh;
+  margin-top: 10vh;
+  padding-top: 2vh;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  wrap: wrap;
+  flex-direction: column;
+}
+
+@media (max-width: 580px) {
+  #loginthing {
+    padding-left: 1vh;
+    padding-right: 1vh;
+    border-radius: 0%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 780px) {
+  #loginthing {
+    border-radius: 0%;
+  }
+}
+
+/*Overall Registration & Login Modal*/
+/*Registration & Login Main Buttons*/
+.modal, .starter, .starter.btn-large:focus {
+  background-color: #d41d3b;
+}
+
+/*Registration & Login Main Buttons*/
+.starter, .starter.btn-large:focus{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.starter.btn-large:hover {
+  background-color: #bf1a35;
+}
+
+.modal-close {
+  font-size: 20px;
 }
