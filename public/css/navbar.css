@@ -21,3 +21,7 @@ nav {
 nav li {
   height: 64px;
 }
+
+nav .side-nav li {
+  letter-spacing: normal;
+}
