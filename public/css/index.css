@@ -80,17 +80,8 @@
   color: goldenrod;
 }
 
-h1, #title {
-  margin-bottom: 0px;
-}
-
-#title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 h1 {
+  margin-bottom: 0px;
   color: #ac8248;
   font-family: 'sports_worldregular';
 }
