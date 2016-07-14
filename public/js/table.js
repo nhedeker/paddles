@@ -1,13 +1,25 @@
 'use strict';
 
+/* eslint-disable max-len */
 (function() {
   let initialized = 0;
 
-  const cardBuilder = function(game) {
+  const dropdownBuilder = function(players, target) {
+    for (const player of players) {
+      const $player = $(`<option value="${player.id}">`);
 
+      $player.text(`${player.first_name} ${player.last_name}`);
+
+      target.append($player);
+    }
+  };
+
+  const cardBuilder = function() {
     const $xhrRecent = $.getJSON('/league/games');
+
+// eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
-      if($xhrRecent.status !== 200) {
+      if ($xhrRecent.status !== 200) {
         Materialize.toast('Something went wrong');
 
         return;
@@ -15,20 +27,21 @@
 
       const $row = $('<div class="row">');
 
-      for (let game of recentGames) {
+      for (const game of recentGames) {
         const $cardCol = $('<div class="col s6 m4 l3">');
         const $cardPan = $('<div class="card-panel red" style="height:27vh">');
         const $innerRow = $('<div class="white-text row">');
         const $leftCol = $('<div class="col s5" style="text-align:center">');
-        const $centerCol =$('<div class="col s2" style="margin-top:5vh; text-align:left">');
+        const $centerCol = $('<div class="col s2" style="margin-top:5vh; text-align:left">');
         const $rightCol = $('<div class="col s5" style="text-align:center">');
         let modifier = 1;
+
         if (!game.t1p2_first_name && !game.t2p2_first_name) {
           modifier = 1.2;
         }
 
         $leftCol.append($(`<p style="font-size:${2 * modifier}vh">${game.t1p1_first_name} ${game.t1p1_last_name}</p>`));
-        $rightCol.append($(`<p style="font-size:${2 * modifier}vh">${game.t2p1_first_name} ${game.t2p1_last_name}</p>`))
+        $rightCol.append($(`<p style="font-size:${2 * modifier}vh">${game.t2p1_first_name} ${game.t2p1_last_name}</p>`));
 
         if (game.t1p2_first_name && game.t2p2_first_name) {
           $leftCol.append($(`<p style="font-size:2vh">${game.t1p2_first_name} ${game.t1p2_last_name}</p>`));
@@ -43,21 +56,20 @@
         $cardCol.append($cardPan);
 
         $row.append($cardCol);
-      };
+      }
 
       $('#recentGames').append($row);
     });
 
     $xhrRecent.fail((jqXHR, textStatus, error) => {
-      Materialize.toast('Error: ' + error);
-    })
-
+      Materialize.toast('Error: ', error);
+    });
   };
 
   const tableBuilder = function() {
-
     const $xhrLeaderboard = $.getJSON('/league/players');
 
+// eslint-disable-next-line max-statements
     $xhrLeaderboard.done((playerResults) => {
       if ($xhrLeaderboard.status !== 200) {
         Materialize.toast('Something went wrong');
@@ -66,7 +78,7 @@
       }
 
       const $table = $('<table>');
-      const $thead =  $('<th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
+      const $thead = $('<th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
       const $tbody = $('<tbody>');
 
       for (let i = 0; i < playerResults.length; i++) {
@@ -74,9 +86,10 @@
           const name = `${playerResults[i].first_name} ${playerResults[i].last_name}`;
           const elo = playerResults[i].elo;
           const $newRow = $(`<tr><td>${i + 1}</td><td>${name}</td><td>${elo}</td>`);
+
           $tbody.append($newRow);
         }
-      };
+      }
 
       $table.append($thead);
       $table.append($tbody);
@@ -91,33 +104,21 @@
         dropdownBuilder(playerResults, $('.player4'));
         $('select').material_select();
       }
-
     });
 
     $xhrLeaderboard.fail((jqXHR, textStatus, error) => {
-      Materialize.toast('Error: ' + error);
+      Materialize.toast('Error: ', error);
     });
-
-  };
-
-  const dropdownBuilder = function(players, target) {
-    for (let player of players) {
-      const $player = $(`<option value="${player.id}">`);
-
-      $player.text(`${player.first_name} ${player.last_name}`);
-
-      target.append($player);
-    };
   };
 
   const dropdownDisabler = function() {
-    let valList = {};
+    const valList = {};
 
-    $('.addchoice :selected').each(function(index, choice) {
+    $('.addchoice :selected').each((index, choice) => {
       valList[$(choice).val()] = 1;
     });
 
-    $('option').each(function(index, option) {
+    $('option').each((index, option) => {
       $(option).attr('disabled', null);
       if ($(option).val() !== 'null' && valList[$(option).val()]) {
         $(option).prop('disabled', true);
@@ -125,17 +126,18 @@
     });
 
     $('select').material_select();
-  }
+  };
 
+// eslint-disable-next-line max-statements
   const gameSender = function() {
     const team1P1Id = $('.player1 :selected').val();
     const team1P2Id = $('.player2 :selected').val();
     const team2P1Id = $('.player3 :selected').val();
     const team2P2Id = $('.player4 :selected').val();
     const team1Score = $('.score1').val();
-    const team2Score =  $('.score2').val();
+    const team2Score = $('.score2').val();
 
-    if (team1P1Id === 'null'|| team2P1Id === 'null') {
+    if (team1P1Id === 'null' || team2P1Id === 'null') {
       return Materialize.toast('Please enter a player 1 for both teams.', 2000);
     }
 
@@ -161,7 +163,7 @@
         team2P1Id,
         team2P2Id,
         team1Score,
-        team2Score})
+        team2Score })
     });
 
     $xhrGame.done(() => {
@@ -176,8 +178,8 @@
       $('#addgamemodal').closeModal();
     });
 
-    $xhrGame.fail((jqXHR, textStatus, error) => {
-      Materialize.toast('Error: ' + jqXHR.responseText);
+    $xhrGame.fail((jqXHR, _textStatus, _error) => {
+      Materialize.toast('Error: ', jqXHR.responseText);
     });
   };
 
@@ -185,7 +187,6 @@
     tableBuilder();
     cardBuilder();
     $('.addchoice').change(dropdownDisabler);
-    $('.submit').click(gameSender)
-
+    $('.submit').click(gameSender);
   });
 })();

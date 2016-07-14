@@ -1,6 +1,5 @@
+/* eslint-disable camelcase, quote-props, lines-around-comment, max-lines */
 'use strict';
-
-/* eslint-disable camelcase, quote-props */
 
 const ev = require('express-validation');
 const validations = require('../validations/leagues');
@@ -176,14 +175,16 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
     league_id: req.session.leagueId
   };
 
-  if ((team1P2Id && team2P2Id) && !(team1P2Id === 'null' && team2P2Id === 'null')) {
+// eslint-disable-next-line max-len
+  if (team1P2Id && team2P2Id && !(team1P2Id === 'null' && team2P2Id === 'null')) {
     newGame.team1_p2_id = team1P2Id;
     newGame.team2_p2_id = team2P2Id;
   }
 
   let eloArray;
 
-  if ((team1P2Id && team2P2Id) && !(team1P2Id === 'null' && team2P2Id === 'null')) {
+// eslint-disable-next-line max-len
+  if (team1P2Id && team2P2Id && !(team1P2Id === 'null' && team2P2Id === 'null')) {
     eloArray = [
       team1P1Id,
       team1P2Id,
@@ -200,89 +201,106 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
 
   knex('games')
     .insert(newGame, '*')
-    .then(() => {
-      return knex('players')
+    .then(() =>
+      knex('players')
       .whereIn('id', eloArray)
+      // eslint-disable-next-line max-statements
       .then((players) => {
-        const player1Elo = players.filter(function(player) {
-          return player.id === team1P1Id;
-        })[0].elo;
-        const player2Elo = players.filter(function(player) {
-          return player.id === team2P1Id;
-        })[0].elo;
+        const player1Elo = players.filter((player) =>
+          player.id === team1P1Id)[0].elo;
+
+        const player2Elo = players.filter((player) =>
+          player.id === team2P1Id)[0].elo;
         let player1NewElo;
         let player2NewElo;
         let promiseList = [];
 
         if (players.length === 2) {
           if (team1Score > team2Score) {
-            player1NewElo = Number.parseInt(elo.newRatingIfWon(player1Elo, player2Elo));
-            player2NewElo = Number.parseInt(elo.newRatingIfLost(player2Elo, player1Elo));
+            player1NewElo = Number.parseInt(
+              elo.newRatingIfWon(player1Elo, player2Elo)
+            );
+            player2NewElo = Number.parseInt(
+              elo.newRatingIfLost(player2Elo, player1Elo)
+            );
           }
           else {
-            player1NewElo = Number.parseInt(elo.newRatingIfLost(player1Elo, player2Elo));
-            player2NewElo = Number.parseInt(elo.newRatingIfWon(player2Elo, player1Elo));
+            player1NewElo = Number.parseInt(
+              elo.newRatingIfLost(player1Elo, player2Elo)
+            );
+            player2NewElo = Number.parseInt(
+              elo.newRatingIfWon(player2Elo, player1Elo)
+            );
           }
           promiseList = [
-            knex('players').update('elo', player1NewElo).where('id', team1P1Id), knex('players').update('elo', player2NewElo).where('id', team2P1Id)
+            knex('players')
+              .update('elo', player1NewElo)
+              .where('id', team1P1Id),
+            knex('players')
+              .update('elo', player2NewElo)
+              .where('id', team2P1Id)
           ];
 
           return promiseList;
+        }
+        let player12NewElo;
+        let player22NewElo;
+        const player12Elo = players.filter((player) =>
+          player.id === team1P2Id)[0].elo;
+        const player22Elo = players.filter((player) =>
+          player.id === team2P2Id)[0].elo;
+
+        const team1Avg = player1Elo + player12Elo / 2;
+        const team2Avg = player2Elo + player22Elo / 2;
+
+        if (team1Score > team2Score) {
+          const team1NewAvg = elo.newRatingIfWon(team1Avg, team2Avg);
+          const team2NewAvg = elo.newRatingIfLost(team2Avg, team1Avg);
+
+          const team1Diff = team1NewAvg - team1Avg;
+          const team2Diff = team2Avg - team2NewAvg;
+
+          player1NewElo = Number.parseInt(player1Elo + team1Diff);
+          player12NewElo = Number.parseInt(player12Elo + team1Diff);
+          player2NewElo = Number.parseInt(player2Elo - team2Diff);
+          player22NewElo = Number.parseInt(player22Elo - team2Diff);
         }
         else {
-          let player12NewElo;
-          let player22NewElo;
-          const player12Elo = players.filter(function(player) {
-            return player.id === team1P2Id;
-          })[0].elo;
-          const player22Elo = players.filter(function(player) {
-            return player.id === team2P2Id;
-          })[0].elo;
+          const team1NewAvg = elo.newRatingIfLost(team1Avg, team2Avg);
+          const team2NewAvg = elo.newRatingIfWon(team2Avg, team1Avg);
 
-          const team1Avg = player1Elo + player12Elo / 2;
-          const team2Avg = player2Elo + player22Elo /2;
+          const team1Diff = team1Avg - team1NewAvg;
+          const team2Diff = team2NewAvg - team2Avg;
 
-          if (team1Score > team2Score) {
-            const team1NewAvg = elo.newRatingIfWon(team1Avg, team2Avg);
-            const team2NewAvg = elo.newRatingIfLost(team2Avg, team1Avg);
-
-            const team1Diff = team1NewAvg - team1Avg;
-            const team2Diff = team2Avg - team2NewAvg;
-
-            player1NewElo = Number.parseInt(player1Elo + team1Diff);
-            player12NewElo = Number.parseInt(player12Elo + team1Diff);
-            player2NewElo = Number.parseInt(player2Elo - team2Diff);
-            player22NewElo = Number.parseInt(player22Elo - team2Diff);
-          }
-          else {
-            const team1NewAvg = elo.newRatingIfLost(team1Avg, team2Avg);
-            const team2NewAvg = elo.newRatingIfWon(team2Avg, team1Avg);
-
-            const team1Diff = team1Avg - team1NewAvg;
-            const team2Diff = team2NewAvg - team2Avg;
-
-            player1NewElo = Number.parseInt(player1Elo - team1Diff);
-            player12NewElo = Number.parseInt(player12Elo - team1Diff);
-            player2NewElo = Number.parseInt(player2Elo + team2Diff);
-            player22NewElo = Number.parseInt(player22Elo + team2Diff);
-          }
-
-          promiseList = [
-            knex('players').update('elo', player1NewElo).where('id', team1P1Id), knex('players').update('elo', player2NewElo).where('id', team2P1Id),
-            knex('players').update('elo', player12NewElo).where('id', team1P2Id),
-            knex('players').update('elo', player22NewElo).where('id', team2P2Id)
-          ];
-
-          return promiseList;
+          player1NewElo = Number.parseInt(player1Elo - team1Diff);
+          player12NewElo = Number.parseInt(player12Elo - team1Diff);
+          player2NewElo = Number.parseInt(player2Elo + team2Diff);
+          player22NewElo = Number.parseInt(player22Elo + team2Diff);
         }
+
+        promiseList = [
+          knex('players')
+            .update('elo', player1NewElo)
+            .where('id', team1P1Id),
+          knex('players')
+            .update('elo', player2NewElo)
+            .where('id', team2P1Id),
+          knex('players')
+            .update('elo', player12NewElo)
+            .where('id', team1P2Id),
+          knex('players')
+            .update('elo', player22NewElo)
+            .where('id', team2P2Id)
+        ];
+
+        return promiseList;
       })
-      .then((promises) => {
-        return Promise.all(promises)
+      .then((promises) =>
+        Promise.all(promises)
           .then(() => {
             res.sendStatus(200);
-          });
-      })
-    })
+          }))
+    )
     .catch((err) => {
       next(err);
     });
