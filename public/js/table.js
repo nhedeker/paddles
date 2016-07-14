@@ -22,39 +22,41 @@
     $xhrRecent.done((recentGames) => {
       const $row = $('<div class="row">');
 
-      for (const game of recentGames) {
-        const $cardCol = $('<div class="col s6 m4 l3">');
-        const $cardPan = $('<div class="card-panel gameCard">');
+      for (let i = 0; i < 6; i++) {
+        const $cardCol = $('<div class="col s6 m6 l4">');
+        const $cardPan = $('<div class="card-panel gameCard redCard z-depth-1">');
         const $table = $('<table class="centered">');
         const $players1Tr = $('<tr>');
         const $scoresTr = $('<tr>');
         const $players2Tr = $('<tr>');
 
-        if (cardSwitch) {
-          $cardPan.addClass('goldCard');
-          cardSwitch = 0;
+        $players1Tr.append($(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`));
+        $players1Tr.append($(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`))
+
+        const $team1Score = $(`<td class="rightborder">${recentGames[i].team1_score}</td>`)
+        const $team2Score = $(`<td>${recentGames[i].team2_score}</td>`)
+
+        if (recentGames[i].team1_score > recentGames[i].team2_score) {
+          $team1Score.addClass('winningscore');
         }
         else {
-          $cardPan.addClass('redCard');
-          cardSwitch = 1;
+          $team2Score.addClass('winningscore');
         }
 
-        $players1Tr.append($(`<td><p class="gameps">${game.t1p1_first_name}</p><p class="gameps">${game.t1p1_last_name}</p></td>`));
-        $players1Tr.append($(`<td><p class="gameps">${game.t2p1_first_name}</p><p class="gameps">${game.t2p1_last_name}</p></td>`));
-
-        $scoresTr.append($(`<td>${game.team1_score}</td>`));
-        $scoresTr.append($(`<td>${game.team2_score}</td>`));
+        $scoresTr.append($team1Score);
+        $scoresTr.append($team2Score);
 
         $table.append($players1Tr);
 
-        if (game.t1p2_first_name && game.t2p2_first_name) {
-          $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t1p2_first_name}</p><p class="gameps">${game.t1p2_last_name}</p></td>`));
-          $players2Tr.append($(`<td class="player2td"><p class="gameps">${game.t2p2_first_name}</p><p class="gameps">${game.t2p2_last_name}</p></td>`));
-          $scoresTr.children().addClass('player2score');
+        if (recentGames[i].t1p2_first_name && recentGames[i].t2p2_first_name) {
+          $players2Tr.append($(`<td class="rightborder player2td"><p class="gameps">${recentGames[i].t1p2_first_name}</p><p class="gameps">${recentGames[i].t1p2_last_name}</p></td>`));
+          $players2Tr.append($(`<td class="player2td"><p class="gameps">${recentGames[i].t2p2_first_name}</p><p class="gameps">${recentGames[i].t2p2_last_name}</p></td>`));
+          $scoresTr.children().addClass('player2score')
+          $players1Tr.children().addClass('player2tdtop')
         }
         else {
-          $players2Tr.append($('<td>'));
-          $scoresTr.children().addClass('player1score');
+          $players2Tr.append($('<td class="empty rightborder">'))
+          $scoresTr.children().addClass('player1score')
         }
 
         $table.append($players2Tr);

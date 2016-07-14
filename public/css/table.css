@@ -28,7 +28,7 @@ html {
 }
 
 .goldCard {
-  background-color: #ac8248;
+  background-color: wheat;
 }
 
 th {
@@ -41,7 +41,7 @@ thead {
   font-size: 3.5vh;
 }
 
-tbody {
+#leaderboard tbody {
   font-size: 2.5vh;
 }
 
@@ -119,6 +119,10 @@ h3 {
   }
 }
 
+.rightborder {
+  border-right: 1.5px solid black
+}
+
 .gameps {
   margin-top: .2vh;
   margin-bottom: .2vh;
@@ -127,7 +131,8 @@ h3 {
 
 .gameCard {
   border-radius: 5px;
-  border: 2px solid black;
+  /*border: 2px solid black;*/
+  font-size: 1.35rem;
 }
 
 .player2td {
@@ -135,13 +140,32 @@ h3 {
   padding-bottom: 0px;
 }
 
+.player2tdtop {
+  padding-bottom: 0.5rem;
+}
+
+.empty {
+  padding-top: 2.7rem;
+}
+
 .player1score {
-  padding-top: 2.15rem;
+  padding-top: 0px;
   padding-bottom: 0px;
+  border-top: 1.5px solid black;
   color: white;
+  font-size: 2.5rem;
+  font-family: 'sports_worldregular';
 }
 
 .player2score {
+  padding-top: 0px;
   padding-bottom: 0px;
+  border-top: 1.5px solid black;
   color: white;
+  font-size: 2.5rem;
+  font-family: 'sports_worldregular';
+}
+
+.winningscore {
+  color: #dead68;
 }
