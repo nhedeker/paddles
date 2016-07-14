@@ -76,7 +76,7 @@ html {
   box-shadow: 0 1px 0 0 green;
 }
 
-#loginthing {
+#loginDiv {
   padding-bottom: 5vh;
   margin-top: 10vh;
   padding-top: 2vh;
@@ -90,7 +90,7 @@ html {
 }
 
 @media (max-width: 580px) {
-  #loginthing {
+  #loginDiv {
     padding-left: 1vh;
     padding-right: 1vh;
     border-radius: 0%;
@@ -99,7 +99,7 @@ html {
 }
 
 @media (max-width: 780px) {
-  #loginthing {
+  #loginDiv {
     border-radius: 0%;
   }
 }
