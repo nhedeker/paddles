@@ -1,25 +1,9 @@
-nav .brand-logo {
+.brand-logo, nav {
   text-transform: uppercase;
   letter-spacing: 4.5px;
   font-size: 2rem;
   padding-left: 4vh;
   font-family: 'octin_sports_rgregular';
-}
-
-nav {
-  background-color: #d41d3b;
-}
-
-nav li {
-  height: 64px;
-}
-
-@font-face {
-    font-family: 'sports_worldregular';
-    src: url('../fonts/sportsWorld/sports_world-regular-webfont.woff2') format('woff2'),
-         url('../fonts/sportsWorld/sports_world-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 
 @font-face {
@@ -28,4 +12,12 @@ nav li {
          url('../fonts/sportsRegular/octin_sports_rg-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+nav {
+  background-color: #d41d3b;
+}
+
+nav li {
+  height: 64px;
 }
