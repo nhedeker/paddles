@@ -21,7 +21,6 @@
     // eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
       const $row = $('<div class="row">');
-
       for (let i = 0; i < 6; i++) {
         const $cardCol = $('<div class="col s6 m6 l4">');
         const $cardPan = $('<div class="card-panel gameCard redCard z-depth-1">');
@@ -65,6 +64,9 @@
         $cardPan.append($table);
         $cardCol.append($cardPan);
         $row.append($cardCol);
+        if (i === recentGames.length - 1) {
+          break;
+        }
       }
 
       $('#recentGames').append($row);
