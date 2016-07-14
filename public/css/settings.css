@@ -71,7 +71,7 @@ html {
   padding-bottom: 3vh;
   padding-left: 4vh;
   padding-right: 4vh;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   font-size: 17px;
   border-radius: 3vh;
 }
