@@ -44,7 +44,7 @@
 }
 
 /*Overall Registration & Login Modal*/
-#registration, #login {
+.modal {
   background-color: #d41d3b;
 }
 
