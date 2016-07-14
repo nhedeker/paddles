@@ -194,6 +194,18 @@ h3 {
   color: black;
 }
 
+.submit {
+  background-color: #af1831;
+}
+
+.submit:focus {
+  background-color: goldenrod;
+}
+
+.submit:hover {
+  background-color: #d41d3b;
+}
+
 .input-field .material-icons {
   color: crimson;
 }
