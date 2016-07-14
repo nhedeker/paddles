@@ -7,24 +7,24 @@ exports.seed = function(knex) {
   return knex('games').del()
     .then(() => {
       return knex('games').insert([
-        {
-          id: 1,
-          team1_p1_id: 1,
-          team1_p2_id: 2,
-          team2_p1_id: 3,
-          team2_p2_id: 4,
-          team1_score: 7,
-          team2_score: 11,
-          league_id: 1
-        },
-        {
-          id: 2,
-          team1_p1_id: 1,
-          team2_p1_id: 3,
-          team1_score: 13,
-          team2_score: 11,
-          league_id: 1
-        }
+        // {
+        //   id: 1,
+        //   team1_p1_id: 1,
+        //   team1_p2_id: 2,
+        //   team2_p1_id: 3,
+        //   team2_p2_id: 4,
+        //   team1_score: 7,
+        //   team2_score: 11,
+        //   league_id: 1
+        // },
+        // {
+        //   id: 2,
+        //   team1_p1_id: 1,
+        //   team2_p1_id: 3,
+        //   team1_score: 13,
+        //   team2_score: 11,
+        //   league_id: 1
+        // }
       ]);
     })
     .then(() => {

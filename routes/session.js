@@ -12,7 +12,7 @@ router.post('/session', (req, res, next) => {
   const { playerPassword } = req.body;
 
   if (!playerEmail || playerEmail.trim() === '') {
-    const err = new Error('email must not be blank');
+    const err = new Error('Email must not be blank');
 
     err.status = 400;
 

@@ -73,7 +73,7 @@
     });
 
     $xhrRecent.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText, 4000);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
 
       return false;
     });
@@ -116,7 +116,7 @@
     });
 
     $xhrLeaderboard.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText, 4000);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
 
       return false;
     });
@@ -187,7 +187,7 @@
     });
 
     $xhrGame.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText, 4000);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
     });
   };
 
@@ -211,7 +211,7 @@
     });
 
     $xhrLeague.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText, 4000);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
     });
   };
 

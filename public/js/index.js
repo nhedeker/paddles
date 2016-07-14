@@ -27,7 +27,7 @@
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
 
       return false;
     });
@@ -51,7 +51,7 @@
 
     // eslint-disable-next-line max-len
     $xhrLeague.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
 
       return false;
     });
@@ -85,7 +85,7 @@
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast('Error: ', jqXHR.responseText);
+      Materialize.toast(`Error: ${jqXHR.responseText}`);
 
       return false;
     });
