@@ -18,7 +18,7 @@
   const cardBuilder = function() {
     const $xhrRecent = $.getJSON('/league/games');
 
-// eslint-disable-next-line max-statements
+    // eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
       const $row = $('<div class="row">');
 
@@ -78,7 +78,7 @@
   const tableBuilder = function() {
     const $xhrLeaderboard = $.getJSON('/league/players');
 
-// eslint-disable-next-line max-statements
+    // eslint-disable-next-line max-statements
     $xhrLeaderboard.done((playerResults) => {
       const $table = $('<table class="striped centered">');
       const $thead = $('<thead><th>Rank</th><th>Name</th><th>Elo</th></tr></thead>');
@@ -172,6 +172,7 @@
     });
 
     $xhrGame.done(() => {
+      Materialize.toast('Game was submitted successfully!');
       $('#leaderboard').empty();
       $('#recentGames').empty();
       tableBuilder();
