@@ -178,15 +178,23 @@ h3 {
 }
 
 .input-field input[type=number]:focus {
-  border-bottom: 1px solid crimson;
-  box-shadow: 0 1px 0 0 crimson;
+  border-bottom: 1px solid goldenrod;
+  box-shadow: 0 1px 0 0 goldenrod;
 }
 
 .input-field input[type=number]:focus + label {
-  color: crimson;
+  color: goldenrod;
 }
 
-li span {
+.input-field .prefix.active {
+  color: goldenrod;
+}
+
+.addchoice ul li span {
+  color: black;
+}
+
+.input-field .material-icons {
   color: crimson;
 }
 

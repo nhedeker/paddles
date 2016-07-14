@@ -22,18 +22,19 @@
       const $row = $('<div class="row">');
 
       for (let i = 0; i < 6; i++) {
-        const $cardCol = $('<div class="col s6 m6 l4">');
+        const $cardCol = $('<div class="col s12 m6 l4">');
         const $cardPan = $('<div class="card-panel gameCard redCard z-depth-1">');
         const $table = $('<table class="centered">');
         const $players1Tr = $('<tr>');
         const $scoresTr = $('<tr>');
         const $players2Tr = $('<tr>');
 
-        $players1Tr.append($(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`));
-        $players1Tr.append($(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`));
+        const $player1Name = $(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`)
+        const $player2Name = $(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`)
 
         const $team1Score = $(`<td class="rightborder">${recentGames[i].team1_score}</td>`);
         const $team2Score = $(`<td>${recentGames[i].team2_score}</td>`);
+
 
         if (recentGames[i].team1_score > recentGames[i].team2_score) {
           $team1Score.addClass('winningscore');
@@ -42,6 +43,8 @@
           $team2Score.addClass('winningscore');
         }
 
+        $players1Tr.append($player1Name);
+        $players1Tr.append($player2Name);
         $scoresTr.append($team1Score);
         $scoresTr.append($team2Score);
 
