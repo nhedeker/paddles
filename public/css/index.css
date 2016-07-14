@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  wrap: wrap;
 }
 
 #updateEmail, #updatePassword, #deleteAccount {
@@ -10,13 +11,28 @@
 }
 
 .container {
-  padding-left: 0px;
-  padding-right: 20px;
   padding-bottom: 5vh;
   margin-top: 10vh;
   padding-top: 2vh;
   border-radius: 50%;
+  background-color: white;
 }
+
+@media (max-width: 780px) {
+  .container {
+    border-radius: 0%;
+  }
+}
+
+@media (max-width: 580px) {
+  .container {
+    padding-left: 1vh;
+    padding-right: 1vh;
+    border-radius: 0%;
+    width: 100%;
+  }
+}
+
 
 /*Registration & Login Main Buttons*/
 .starter, .starter.btn-large:focus{
@@ -65,10 +81,6 @@
 .input-field .prefix.active {
   color: goldenrod;
 }
-
-/*.active {
-  color: goldenrod;
-}*/
 
 h1, #title {
   margin-bottom: 0px;
