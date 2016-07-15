@@ -23,15 +23,14 @@
     });
 
     $xhr.done(() => {
-      Materialize.toast('Your account has been created! Please login.', 2500);
+      Materialize.toast('Your account has been created! Please login.', 3500);
       $('#registration input').val('');
       $('#registration .valid').removeClass('valid');
       $('#registration .active').removeClass('active');
-      displayUserInformation();
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 3500);
 
       return false;
     });
@@ -47,7 +46,7 @@
     });
 
     $xhrLeague.done(() => {
-      Materialize.toast('New League Created', 2500);
+      Materialize.toast('New League Created', 3500);
 
       // eslint-disable-next-line max-len
       createPlayer({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword });
@@ -55,7 +54,7 @@
 
     // eslint-disable-next-line max-len
     $xhrLeague.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 3500);
 
       return false;
     });
@@ -66,11 +65,11 @@
     const playerPassword = $('#loginPassword').val().trim();
 
     if (!playerEmail || playerEmail.indexOf('@') < 0) {
-      return Materialize.toast('Please enter a valid email address', 2500);
+      return Materialize.toast('Please enter a valid email address', 3500);
     }
 
     if (!playerPassword) {
-      return Materialize.toast('Please enter a password', 2500);
+      return Materialize.toast('Please enter a password', 3500);
     }
 
     const $xhr = $.ajax({
@@ -85,7 +84,7 @@
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 3500);
 
       return false;
     });
@@ -106,28 +105,28 @@
     const confirmRegLeaguePass = $('#confirmLeaguePassword').val().trim();
 
     if (!firstName) {
-      return Materialize.toast('Please enter your first name', 2500);
+      return Materialize.toast('Please enter your first name', 3500);
     }
 
     if (!lastName) {
-      return Materialize.toast('Please enter your last name', 2500);
+      return Materialize.toast('Please enter your last name', 3500);
     }
 
     if (!playerEmail || playerEmail.indexOf('@') < 0) {
-      return Materialize.toast('Please enter a valid email address', 2500);
+      return Materialize.toast('Please enter a valid email address', 3500);
     }
 
     if (!playerPassword) {
-      return Materialize.toast('Please enter a password', 2500);
+      return Materialize.toast('Please enter a password', 3500);
     }
 
     if (playerPassword !== playerConfirmPass) {
-      return Materialize.toast('Please confirm your password', 2500);
+      return Materialize.toast('Please confirm your password', 3500);
     }
 
     // eslint-disable-next-line max-len
     if ((!regLeagueName || !regLeaguePass) && (!loginLeagueName || !loginLeaguePass)) {
-      return Materialize.toast('Please join or create a league', 2500);
+      return Materialize.toast('Please join or create a league', 3500);
     }
 
     let leagueName;
@@ -150,7 +149,7 @@
       createLeague({ leagueName, leaguePassword, firstName, lastName, playerEmail, playerPassword });
     }
     else {
-      return Materialize.toast('Please confirm the league password', 2500);
+      return Materialize.toast('Please confirm the league password', 3500);
     }
   });
 })();
