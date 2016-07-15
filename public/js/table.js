@@ -189,6 +189,11 @@
       tableBuilder();
       cardBuilder();
       $('#addgamemodal').closeModal();
+      $('.addchoice').prop('selectedIndex', 0);
+      dropdownDisabler();
+      $('.score1').val(null);
+      $('.score2').val(null);
+      $('#addgamemodal .active').removeClass('active');
     });
 
     $xhrGame.fail((jqXHR, _textStatus, _error) => {
