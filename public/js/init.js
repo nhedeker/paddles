@@ -21,7 +21,7 @@
       });
 
       $xhr.fail(() => {
-        Materialize.toast('Unable to log out. Please try again.');
+        Materialize.toast('Unable to log out. Please try again.', 2500);
       });
     });
   }

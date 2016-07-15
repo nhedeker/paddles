@@ -78,7 +78,7 @@
     });
 
     $xhrRecent.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
 
       return false;
     });
@@ -121,7 +121,7 @@
     });
 
     $xhrLeaderboard.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
 
       return false;
     });
@@ -154,19 +154,19 @@
     const team2Score = $('.score2').val();
 
     if (team1P1Id === 'null' || team2P1Id === 'null') {
-      return Materialize.toast('Please enter a player 1 for both teams.', 2000);
+      return Materialize.toast('Please enter a player 1 for both teams', 2500);
     }
 
     if (team1P2Id === 'null' && team2P2Id !== 'null' || team1P2Id !== 'null' && team2P2Id === 'null') {
-      return Materialize.toast('Please enter a player 2 for both teams.', 2000);
+      return Materialize.toast('Please enter a player 2 for both teams', 2500);
     }
 
     if (!team1Score || !team2Score) {
-      return Materialize.toast('Please enter a score for both teams.', 2000);
+      return Materialize.toast('Please enter a score for both teams', 2500);
     }
 
     if (team1Score === team2Score) {
-      return Materialize.toast('No ties!', 2000);
+      return Materialize.toast('No ties allowed!', 2500);
     }
 
     const $xhrGame = $.ajax({
@@ -183,7 +183,7 @@
     });
 
     $xhrGame.done(() => {
-      Materialize.toast('Game was submitted successfully!', 2000);
+      Materialize.toast('Game was submitted successfully!', 2500);
       $('#leaderboard').empty();
       $('#recentGames').empty();
       tableBuilder();
@@ -197,7 +197,7 @@
     });
 
     $xhrGame.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
     });
   };
 
@@ -221,7 +221,7 @@
     });
 
     $xhrLeague.fail((jqXHR, _textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
     });
   };
 

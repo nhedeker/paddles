@@ -35,7 +35,7 @@
 
     // eslint-disable-next-line max-len
     $xhrSettings.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
 
       return false;
     });
@@ -64,11 +64,11 @@
         text = 'Password was updated successfully!';
       }
 
-      Materialize.toast(text);
+      Materialize.toast(text, 2500);
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {
-      Materialize.toast(`Error: ${jqXHR.responseText}`);
+      Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
 
       return false;
     });
@@ -78,12 +78,8 @@
     $('#updateEmail').on('click', (_event) => {
       const playerEmail = $('#newEmail').val().trim();
 
-      if (!playerEmail) {
-        return Materialize.toast('Enter an email, dummy.', 2000);
-      }
-
-      if (playerEmail.indexOf('@') < 0) {
-        return Materialize.toast('Enter a real email, dummy.', 2000);
+      if (!playerEmail || playerEmail.indexOf('@') < 0) {
+        return Materialize.toast('Please enter a valid email address', 2500);
       }
 
       const update = { playerEmail };
@@ -98,11 +94,11 @@
       const confirmPassword = $('#confirmPassword').val().trim();
 
       if (!playerPassword) {
-        return Materialize.toast('Enter a password, dummy.', 2000);
+        return Materialize.toast('Please enter a new password', 2500);
       }
 
       if (playerPassword !== confirmPassword) {
-        return Materialize.toast('Confirm your password, dummy.', 2000);
+        return Materialize.toast('Please confirm your password', 2500);
       }
 
       const update = { playerPassword };
@@ -123,7 +119,7 @@
       });
 
       $xhr.fail((jqXHR, textStatus, _error) => {
-        Materialize.toast(`Error: ${jqXHR.responseText}`);
+        Materialize.toast(`Error: ${jqXHR.responseText}`, 2500);
 
         return false;
       });
