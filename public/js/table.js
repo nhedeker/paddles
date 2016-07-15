@@ -20,6 +20,7 @@
     // eslint-disable-next-line max-statements
     $xhrRecent.done((recentGames) => {
       const $row = $('<div class="row">');
+
       if (recentGames.length === 0) {
         return;
       }
@@ -31,12 +32,11 @@
         const $scoresTr = $('<tr>');
         const $players2Tr = $('<tr>');
 
-        const $player1Name = $(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`)
-        const $player2Name = $(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`)
+        const $player1Name = $(`<td class="rightborder"><p class="gameps">${recentGames[i].t1p1_first_name}</p><p class="gameps">${recentGames[i].t1p1_last_name}</p></td>`);
+        const $player2Name = $(`<td><p class="gameps">${recentGames[i].t2p1_first_name}</p><p class="gameps">${recentGames[i].t2p1_last_name}</p></td>`);
 
         const $team1Score = $(`<td class="rightborder">${recentGames[i].team1_score}</td>`);
         const $team2Score = $(`<td>${recentGames[i].team2_score}</td>`);
-
 
         if (recentGames[i].team1_score > recentGames[i].team2_score) {
           $team1Score.addClass('winningscore');
