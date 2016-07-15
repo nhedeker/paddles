@@ -2,6 +2,12 @@
 
 /* eslint-disable max-len */
 (function() {
+  if (!window.COOKIES.loggedIn) {
+    window.location.href = '/';
+
+    return;
+  }
+
   let initialized = 0;
 
   const dropdownBuilder = function(players, target) {
