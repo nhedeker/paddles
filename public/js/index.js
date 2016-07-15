@@ -24,6 +24,10 @@
 
     $xhr.done(() => {
       Materialize.toast('Your account has been created! Please login.', 2500);
+      $('#registration input').val('');
+      $('#registration .valid').removeClass('valid');
+      $('#registration .active').removeClass('active');
+      displayUserInformation();
     });
 
     $xhr.fail((jqXHR, textStatus, _error) => {

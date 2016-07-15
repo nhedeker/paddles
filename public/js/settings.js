@@ -58,9 +58,16 @@
 
       if (url.includes('email')) {
         text = 'Email was updated successfully!';
+        $('#newEmail').val('');
+        $('.emailDiv .valid').removeClass('valid');
+        $('.emailDiv .active').removeClass('active');
         displayUserInformation();
       }
       else if (url.includes('password')) {
+        $('#newPassword').val('');
+        $('#confirmPassword').val('');
+        $('.passDiv .valid').removeClass('valid');
+        $('.passDiv .active').removeClass('active');
         text = 'Password was updated successfully!';
       }
 
