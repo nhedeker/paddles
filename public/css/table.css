@@ -123,6 +123,11 @@ h3 {
   border-right: 1.5px solid black
 }
 
+.nametd {
+  width: 5rem;
+  padding-top: 0px;
+}
+
 .gameps {
   margin-top: .2vh;
   margin-bottom: .2vh;
@@ -137,15 +142,16 @@ h3 {
 
 .player2td {
   padding-top: 0px;
-  padding-bottom: 0px;
+  padding-bottom: 1rem;
 }
 
 .player2tdtop {
-  padding-bottom: 0.3rem;
+  padding-bottom: 0.1rem;
 }
 
 .empty {
-  padding-top: 2.5rem;
+  padding-top: 2.4rem;
+  padding-bottom: 2rem;
 }
 
 .playerscore {
