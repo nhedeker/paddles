@@ -61,12 +61,12 @@
         if (recentGames[i].t1p2_first_name && recentGames[i].t2p2_first_name) {
           $players2Tr.append($(`<td class="rightborder player2td"><p class="gameps">${recentGames[i].t1p2_first_name}</p><p class="gameps">${recentGames[i].t1p2_last_name}</p></td>`));
           $players2Tr.append($(`<td class="player2td"><p class="gameps">${recentGames[i].t2p2_first_name}</p><p class="gameps">${recentGames[i].t2p2_last_name}</p></td>`));
-          $scoresTr.children().addClass('player2score');
+          $scoresTr.children().addClass('playerscore');
           $players1Tr.children().addClass('player2tdtop');
         }
         else {
           $players2Tr.append($('<td class="empty rightborder">'));
-          $scoresTr.children().addClass('player1score');
+          $scoresTr.children().addClass('playerscore');
         }
 
         $table.append($players2Tr);

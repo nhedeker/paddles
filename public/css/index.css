@@ -85,7 +85,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  wrap: wrap;
+  flex-wrap: wrap;
   flex-direction: column;
 }
 
