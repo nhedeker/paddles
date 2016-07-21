@@ -73,6 +73,7 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
     .first()
     .then((emailRes) => {
       if (emailRes) {
+        // ****** create new error
         return res
           .status(400)
           .set('Content-Type', 'text/plain')

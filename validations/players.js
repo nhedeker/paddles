@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 
-module.exports.post = {
+module.exports.patch = {
   body: {
     playerEmail: Joi.string()
       .label('Email')

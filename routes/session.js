@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt-as-promised');
 // eslint-disable-next-line new-cap
 const router = express.Router();
 
+// ***** joi vali
 router.post('/session', (req, res, next) => {
   let { playerEmail } = req.body;
   const { playerPassword } = req.body;
