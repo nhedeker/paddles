@@ -73,87 +73,86 @@ router.post('/league/player', ev(validations.postPlayer), (req, res, next) => {
     .first()
     .then((emailRes) => {
       if (emailRes) {
-        // ****** create new error
-        return res
-          .status(400)
-          .set('Content-Type', 'text/plain')
-          .send('Email already exists.');
+        const err = new Error('Email already exists.');
+
+        err.status(400);
+        throw err;
       }
 
       return knex('leagues')
-        .where('name', leagueName)
-        .first()
-        .then((leagueRes) => {
-          if (!leagueRes) {
-            const err = new Error('Invalid league name or password.');
-
-            err.status = 401;
-
-            throw err;
-          }
-          leagueId = leagueRes.id;
-
-          return bcrypt.compare(leaguePassword, leagueRes.hashed_password);
-        })
-        .then(() => bcrypt.hash(playerPassword, 10))
-        .then((hashedPass) =>
-          knex('players')
-            .insert({
-              first_name: firstName,
-              last_name: lastName,
-              email: playerEmail.toLowerCase(),
-              hashed_password: hashedPass,
-              league_id: leagueId
-            }, '*')
-        )
-        .then(() => {
-          const options = {
-            url: 'https://api.postmarkapp.com/email',
-            method: 'POST',
-            headers: {
-              'X-Postmark-Server-Token': 'a7c49a8a-155d-4f7c-aaa4-9da07666aa19',
-              'Accept': 'application/json'
-            },
-            json: {
-              'From': 'paddles@kenmcgrady.com',
-              'To': playerEmail,
-              'Subject': 'Welcome to Paddles!',
-
-              // eslint-disable-next-line max-len
-              'HtmlBody': '<h3>Hello! Welcome to Paddles!</h3><br></br><p>Thank you for signing up! We hope you enjoy the site!</p><br></br><p>Sincerely,</p><p>The Paddles Team</p>',
-
-              // eslint-disable-next-line max-len, no-useless-escape
-              'TextBody': 'Hello! Welcome to Paddles!\Thank you for signing up! We hope you enjoy the site!\Sincerely,\The Paddles Team',
-              'ReplyTo': 'paddles@kenmcgrady.com'
-            }
-          };
-
-          // eslint-disable-next-line no-shadow
-          request(options, (err, res, body) => {
-            if (err) {
-              // eslint-disable-next-line no-console
-              console.error(err);
-            }
-
-            // eslint-disable-next-line no-console
-            console.log('Response from Email: ', res.statusCode);
-
-            // eslint-disable-next-line no-console
-            console.log(body);
-          });
-          res.sendStatus(200);
-        })
-        .catch(bcrypt.MISMATCH_ERROR, () => {
-          const err = new Error('Invalid league name or password.');
-
-          err.status = 401;
-
-          throw err;
-        });
+      .where('name', leagueName)
+      .first();
     })
-    .catch((err) => {
-      next(err);
+    .then((leagueRes) => {
+      if (!leagueRes) {
+        const err = new Error('Invalid league name or password.');
+
+        err.status = 401;
+
+        throw err;
+      }
+      leagueId = leagueRes.id;
+
+      return bcrypt.compare(leaguePassword, leagueRes.hashed_password);
+    })
+    .then(() => bcrypt.hash(playerPassword, 10))
+    .then((hashedPass) =>
+    knex('players')
+    .insert({
+      first_name: firstName,
+      last_name: lastName,
+      email: playerEmail.toLowerCase(),
+      hashed_password: hashedPass,
+      league_id: leagueId
+    }, '*')
+  )
+  .then(() => {
+    const options = {
+      url: 'https://api.postmarkapp.com/email',
+      method: 'POST',
+      headers: {
+        'X-Postmark-Server-Token': 'a7c49a8a-155d-4f7c-aaa4-9da07666aa19',
+        'Accept': 'application/json'
+      },
+      json: {
+        'From': 'paddles@kenmcgrady.com',
+        'To': playerEmail,
+        'Subject': 'Welcome to Paddles!',
+
+        // eslint-disable-next-line max-len
+        'HtmlBody': '<h3>Hello! Welcome to Paddles!</h3><br></br><p>Thank you for signing up! We hope you enjoy the site!</p><br></br><p>Sincerely,</p><p>The Paddles Team</p>',
+
+        // eslint-disable-next-line max-len, no-useless-escape
+        'TextBody': 'Hello! Welcome to Paddles!\Thank you for signing up! We hope you enjoy the site!\Sincerely,\The Paddles Team',
+        'ReplyTo': 'paddles@kenmcgrady.com'
+      }
+    };
+
+    // eslint-disable-next-line no-shadow
+    request(options, (err, res, body) => {
+      if (err) {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
+
+      // eslint-disable-next-line no-console
+      console.log('Response from Email: ', res.statusCode);
+
+      // eslint-disable-next-line no-console
+      console.log(body);
     });
+    res.sendStatus(200);
+  })
+  .catch(bcrypt.MISMATCH_ERROR, () => {
+    const err = new Error('Invalid league name or password.');
+
+    err.status = 401;
+
+    throw err;
+  })
+  .catch((err) => {
+    next(err);
+  });
 });
 
 // creates a game within a certain league
@@ -297,11 +296,11 @@ router.post('/league/game', checkAuth, ev(validations.postGame), (req, res, next
         return promiseList;
       })
       .then((promises) =>
-        Promise.all(promises)
-          .then(() => {
-            res.sendStatus(200);
-          }))
+        Promise.all(promises))
     )
+    .then(() => {
+      res.sendStatus(200);
+    })
     .catch((err) => {
       next(err);
     });

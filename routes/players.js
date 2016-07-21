@@ -81,7 +81,7 @@ router.patch('/player/email', checkAuth, ev(validations.patch), (req, res, next)
 });
 
 // eslint-disable-next-line max-len
-router.patch('/player/password', checkAuth, ev(validations.post), (req, res, next) => {
+router.patch('/player/password', checkAuth, ev(validations.patch), (req, res, next) => {
   const { userId } = req.session;
   const playerPassword = req.body.playerPassword;
 
