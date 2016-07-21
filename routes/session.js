@@ -70,6 +70,7 @@ router.post('/session', (req, res, next) => {
 
 router.delete('/session', (req, res, _next) => {
   delete req.session.userId;
+  delete req.session.leagueId;
   res.clearCookie('loggedIn');
   res.sendStatus(200);
 });
